@@ -40,9 +40,6 @@ namespace LANPlayClient
 
 		private void btn_choosedir_Click(object sender, EventArgs e)
 		{
-			RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
-			string lpclientdir = key.GetValue("LPClientDir").ToString();
-			this.fld_dia_client.SelectedPath = lpclientdir;
 			this.fld_dia_client.ShowDialog();
 		}
 
@@ -57,7 +54,7 @@ namespace LANPlayClient
 
 		protected override void Dispose(bool disposing)
 		{
-			if ((!disposing ? false : this.components != null))
+			if ((disposing && this.components != null))
 			{
 				this.components.Dispose();
 			}
@@ -71,6 +68,7 @@ namespace LANPlayClient
 			int reg_httptimeout = int.Parse(key.GetValue("httptimeout").ToString());
 			this.txt_httptimeout.Text = reg_httptimeout.ToString();
 			this.txt_serverlisturl.Text = serverlisturl;
+			fld_dia_client.SelectedPath = key.GetValue("LPClientDir").ToString();
 		}
 
 		private void InitializeComponent()
