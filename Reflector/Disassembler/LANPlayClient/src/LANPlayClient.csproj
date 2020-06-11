@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <ProjectType>local</ProjectType>
+    <ProjectVersion>7.10.377</ProjectVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5361EB7D-32EC-4D91-88DF-B86DEEA27D6E}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AssemblyName>LANPlayClient</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Compile Include="Global.cs" />
+    <Compile Include="LANPlayClient\LANPlayClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LANPlayClient\frm_einstellungen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LANPlayClient\Program.cs" />
+    <Compile Include="LANPlayClient\frm_update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LANPlayClient\Properties\Resources.cs" />
+    <Compile Include="LANPlayClient\Properties\Settings.cs" />
+    <EmbeddedResource Include="LANPlayClient.LANPlayClient.resources" />
+    <EmbeddedResource Include="LANPlayClient.frm_einstellungen.resources" />
+    <EmbeddedResource Include="LANPlayClient.Properties.Resources.resources" />
+    <EmbeddedResource Include="LANPlayClient.frm_update.resources" />
+  </ItemGroup>
+</Project>

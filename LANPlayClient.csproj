@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{C433A117-B835-4AC7-B504-61CB4175E4A4}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <AssemblyName>LANPlayClient</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LANPlayClient</RootNamespace>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>false</DebugSymbols>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Program.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\Settings.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTimeSharedInput>true</DesignTimeSharedInput>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="frm_update.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_einstellungen.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LANPlayClient.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="frm_update.resx">
+      <DependentUpon>frm_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_einstellungen.resx">
+      <DependentUpon>frm_einstellungen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LANPlayClient.resx">
+      <DependentUpon>LANPlayClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
