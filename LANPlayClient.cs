@@ -64,8 +64,6 @@ namespace LANPlayClient
 
 		private Label lbl_txt_ping;
 
-		private Label lbl_httptimeout;
-
 		private MenuStrip menuStrip1;
 
 		private ToolStripMenuItem mnu_Datei;
@@ -74,6 +72,7 @@ namespace LANPlayClient
 
 		private ToolStripMenuItem mnu_beenden;
         private PictureBox pic_yoshi;
+        private ProgressBar pb_loadsrvlist;
         private Button btn_winpcapdl;
 
 		public LANPlayClient()
@@ -87,10 +86,10 @@ namespace LANPlayClient
 			string LPClientDir = key.GetValue("LPClientDir").ToString();
 			string exepath = string.Concat(LPClientDir, "\\lan-play-win64.exe");
 			string usesrv = this.drp_srvlist.Text;
-			int srvaddrlength = usesrv.Length - 5 - 7;
-			string serveraddress = usesrv.Substring(7, srvaddrlength);
-			string parameters = string.Concat(" --relay-server-addr ", serveraddress);
-			Process.Start(exepath, parameters);
+            string serveraddress = usesrv;
+            string parameters = key.GetValue("Parameters").ToString();
+			string runparameters = string.Concat(parameters, serveraddress);
+			Process.Start(exepath, runparameters);
 		}
 
         //private async Task<TaskAwaiter> Loadsrvlist()
@@ -106,8 +105,12 @@ namespace LANPlayClient
             string[] Servers = SrvListFull.Split(new char[] { '{' });
             int ctr01 = 0;
             string[] strArrays = Servers;
+            pb_loadsrvlist.Visible = true;
+            Cursor.Current = Cursors.WaitCursor;
                 for (int i = 0; i < (int)strArrays.Length; i++)
                 {
+                pb_loadsrvlist.Maximum = (int)strArrays.Length;
+                pb_loadsrvlist.Value = i+1;
                     string ch = strArrays[i];
                     string[] ServerValues = Servers[ctr01].Split(new char[] { ':' });
                     ctr01++;
@@ -125,8 +128,8 @@ namespace LANPlayClient
                         if (srvval.Contains("port"))
                         {
                             port = ServerValues[ctr02 + 1].Substring(1, ServerValues[ctr02 + 1].IndexOf(',')).Replace("\"", string.Empty).Replace(",", "");
-                            string url = string.Concat(new string[] { "http://", ipaddress, ":", port, "/info" });
-                            if (ping(url))
+                            string url = string.Concat(new string[] { ipaddress, ":", port});
+                            if (ping("http://"+url+"/info"))
                             {
                                 drp_srvlist.Items.Add(url);
                                 drp_srvlist.SelectedIndex = 0;
@@ -139,6 +142,8 @@ namespace LANPlayClient
                     //    result = true;
                     //}
                 }
+            pb_loadsrvlist.Visible = false;
+            Cursor.Current = Cursors.Default;
 
 
            
@@ -173,7 +178,7 @@ namespace LANPlayClient
 		private void drp_srvlist_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			WebClient wc = new WebClient();
-			string url = this.drp_srvlist.SelectedItem.ToString();
+			string url = "http://"+this.drp_srvlist.SelectedItem.ToString()+"/info";
 			Stopwatch timer = new Stopwatch();
 			timer.Start();
 			byte[] raw = wc.DownloadData(url);
@@ -217,7 +222,10 @@ namespace LANPlayClient
 				key.SetValue("httptimeout", "300");
 				key.SetValue("serverlisturl", "https://raw.githubusercontent.com/GreatWizard/lan-play-status/master/public/data/servers.json");
 				key.SetValue("LPClientDir", "C:\\Kutaro-R3n3-LanplayGUI");
-			}
+                key.SetValue("Parameters", " --relay-server-addr ");
+                key.SetValue("Parametersmode", "1");
+
+            }
 			RegistryKey regkey = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
 			string LPClientDir = regkey.GetValue("LPClientDir").ToString();
 			if (!Directory.Exists(LPClientDir))
@@ -264,13 +272,13 @@ namespace LANPlayClient
             this.lbl_txt_usronl = new System.Windows.Forms.Label();
             this.lbl_txt_srvtyp = new System.Windows.Forms.Label();
             this.lbl_txt_srvstatus = new System.Windows.Forms.Label();
-            this.lbl_httptimeout = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnu_Datei = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_einstellungen = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_beenden = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_winpcapdl = new System.Windows.Forms.Button();
             this.pic_yoshi = new System.Windows.Forms.PictureBox();
+            this.pb_loadsrvlist = new System.Windows.Forms.ProgressBar();
             this.grp_srvstatus.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_yoshi)).BeginInit();
@@ -355,7 +363,7 @@ namespace LANPlayClient
             this.grp_srvstatus.Controls.Add(this.lbl_txt_srvstatus);
             this.grp_srvstatus.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grp_srvstatus.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.grp_srvstatus.Location = new System.Drawing.Point(481, 185);
+            this.grp_srvstatus.Location = new System.Drawing.Point(475, 150);
             this.grp_srvstatus.Name = "grp_srvstatus";
             this.grp_srvstatus.Size = new System.Drawing.Size(305, 162);
             this.grp_srvstatus.TabIndex = 7;
@@ -481,22 +489,13 @@ namespace LANPlayClient
             this.lbl_txt_srvstatus.TabIndex = 0;
             this.lbl_txt_srvstatus.Text = "Serverstatus:";
             // 
-            // lbl_httptimeout
-            // 
-            this.lbl_httptimeout.AutoSize = true;
-            this.lbl_httptimeout.Location = new System.Drawing.Point(370, 51);
-            this.lbl_httptimeout.Name = "lbl_httptimeout";
-            this.lbl_httptimeout.Size = new System.Drawing.Size(45, 13);
-            this.lbl_httptimeout.TabIndex = 8;
-            this.lbl_httptimeout.Text = "Timeout";
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_Datei});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(980, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(791, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -536,23 +535,31 @@ namespace LANPlayClient
             // 
             // pic_yoshi
             // 
-            this.pic_yoshi.Enabled = false;
             this.pic_yoshi.Image = global::LANPlayClient.Properties.Resources.FarawayNaiveBarnacle_size_restricted;
-            this.pic_yoshi.Location = new System.Drawing.Point(507, 353);
+            this.pic_yoshi.Location = new System.Drawing.Point(501, 353);
             this.pic_yoshi.Name = "pic_yoshi";
             this.pic_yoshi.Size = new System.Drawing.Size(256, 256);
             this.pic_yoshi.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pic_yoshi.TabIndex = 11;
             this.pic_yoshi.TabStop = false;
             // 
+            // pb_loadsrvlist
+            // 
+            this.pb_loadsrvlist.Location = new System.Drawing.Point(382, 42);
+            this.pb_loadsrvlist.Name = "pb_loadsrvlist";
+            this.pb_loadsrvlist.Size = new System.Drawing.Size(365, 23);
+            this.pb_loadsrvlist.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pb_loadsrvlist.TabIndex = 12;
+            this.pb_loadsrvlist.Visible = false;
+            // 
             // LANPlayClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(980, 688);
+            this.ClientSize = new System.Drawing.Size(791, 688);
+            this.Controls.Add(this.pb_loadsrvlist);
             this.Controls.Add(this.pic_yoshi);
             this.Controls.Add(this.btn_winpcapdl);
-            this.Controls.Add(this.lbl_httptimeout);
             this.Controls.Add(this.grp_srvstatus);
             this.Controls.Add(this.btn_connectserver);
             this.Controls.Add(this.lbl_thirdstep);
@@ -594,7 +601,6 @@ namespace LANPlayClient
 				RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
 				int reg_httptimeout = int.Parse(key.GetValue("httptimeout").ToString());
 				request.Timeout = reg_httptimeout;
-				this.lbl_httptimeout.Text = string.Concat("Timeout:", reg_httptimeout.ToString());
 				request.AllowAutoRedirect = false;
 				request.Method = "HEAD";
 				using (WebResponse response = request.GetResponse())
