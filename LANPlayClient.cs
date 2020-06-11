@@ -158,7 +158,7 @@ namespace LANPlayClient
             pic_yoshi.Enabled = true;
             //var t1 = await Task.Run(() => Loadsrvlist());
             Loadsrvlist();
-            pic_yoshi.Enabled = false;
+            //pic_yoshi.Enabled = false;
 		}
 
 		private void btn_winpcapdl_Click(object sender, EventArgs e)
@@ -216,17 +216,37 @@ namespace LANPlayClient
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			if (Registry.CurrentUser.OpenSubKey("SOFTWARE\\r3n3kutaro\\LPgui") == null)
+            RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
+            if (Registry.CurrentUser.OpenSubKey("SOFTWARE\\r3n3kutaro\\LPgui") == null)
 			{
-				RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
 				key.SetValue("httptimeout", "300");
 				key.SetValue("serverlisturl", "https://raw.githubusercontent.com/GreatWizard/lan-play-status/master/public/data/servers.json");
 				key.SetValue("LPClientDir", "C:\\Kutaro-R3n3-LanplayGUI");
                 key.SetValue("Parameters", " --relay-server-addr ");
                 key.SetValue("Parametersmode", "1");
-
             }
-			RegistryKey regkey = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
+            if (key.GetValue("httptimeout") == null)
+            {
+                key.SetValue("httptimeout", "300");
+            }
+            if (key.GetValue("serverlisturl") == null)
+            {
+                key.SetValue("serverlisturl", "https://raw.githubusercontent.com/GreatWizard/lan-play-status/master/public/data/servers.json");
+            }
+            if (key.GetValue("LPClientDir") == null)
+            {
+                key.SetValue("LPClientDir", "C:\\Kutaro-R3n3-LanplayGUI");
+            }
+            if (key.GetValue("Parameters") == null)
+            {
+                key.SetValue("Parameters", " --relay-server-addr ");
+            }
+            if (key.GetValue("Parametersmode") == null)
+            {
+                key.SetValue("Parametersmode", "1");
+            }
+
+            RegistryKey regkey = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
 			string LPClientDir = regkey.GetValue("LPClientDir").ToString();
 			if (!Directory.Exists(LPClientDir))
 			{
