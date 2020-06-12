@@ -61,9 +61,14 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -94,10 +99,16 @@
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LANPlayClient.cs">
+    <Compile Include="frm_LANPlayClient.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="quickconnect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="quickconnect.Designer.cs">
+      <DependentUpon>quickconnect.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="frm_update.resx">
       <DependentUpon>frm_update.cs</DependentUpon>
@@ -105,13 +116,16 @@
     <EmbeddedResource Include="frm_einstellungen.resx">
       <DependentUpon>frm_einstellungen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LANPlayClient.resx">
-      <DependentUpon>LANPlayClient.cs</DependentUpon>
+    <EmbeddedResource Include="frm_LANPlayClient.resx">
+      <DependentUpon>frm_LANPlayClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="quickconnect.resx">
+      <DependentUpon>quickconnect.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +133,7 @@
     <None Include="LANPlayClient_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\FarawayNaiveBarnacle-size_restricted.gif" />
   </ItemGroup>
   <ItemGroup>

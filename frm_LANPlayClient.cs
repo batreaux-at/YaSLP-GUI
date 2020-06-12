@@ -1,4 +1,5 @@
 using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -18,7 +19,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace LANPlayClient
 {
-	public class LANPlayClient : Form
+	public class frm_LANPlayClient : Form
 	{
 		private IContainer components = null;
 
@@ -73,9 +74,10 @@ namespace LANPlayClient
 		private ToolStripMenuItem mnu_beenden;
         private PictureBox pic_yoshi;
         private ProgressBar pb_loadsrvlist;
+        private ToolStripMenuItem quickConnectToolStripMenuItem;
         private Button btn_winpcapdl;
 
-		public LANPlayClient()
+		public frm_LANPlayClient()
 		{
 			this.InitializeComponent();
 		}
@@ -85,81 +87,96 @@ namespace LANPlayClient
 			RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
 			string LPClientDir = key.GetValue("LPClientDir").ToString();
 			string exepath = string.Concat(LPClientDir, "\\lan-play-win64.exe");
-			string usesrv = this.drp_srvlist.Text;
+            string chosenitem = drp_srvlist.SelectedItem.ToString();
+            int elementid = int.Parse(chosenitem.Substring(0, chosenitem.IndexOf(':')));
+            string usesrv = srvlistcl.srvlist[elementid,0] + ":" + srvlistcl.srvlist[elementid,1];
             string serveraddress = usesrv;
             string parameters = key.GetValue("Parameters").ToString();
 			string runparameters = string.Concat(parameters, serveraddress);
 			Process.Start(exepath, runparameters);
 		}
-
-        //private async Task<TaskAwaiter> Loadsrvlist()
-        private bool Loadsrvlist()
+        static string[,] Loadsrvlist()
         {
-            drp_srvlist.Items.Clear();
-            string ipaddress = "";
-            string port = "";
-            RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
-            string serverlisturl = key.GetValue("serverlisturl").ToString();
-            byte[] raw1 = (new WebClient()).DownloadData(serverlisturl);
-            string SrvListFull = Encoding.UTF8.GetString(raw1);
+            byte[] raw1 = (new WebClient()).DownloadData("https://raw.githubusercontent.com/GreatWizard/lan-play-status/master/public/data/servers.json");
+            string SrvListFull = Encoding.UTF8.GetString(raw1).Replace("[", string.Empty).Replace("]", string.Empty).Replace("\"", string.Empty).Replace(" ", string.Empty).Replace("}", string.Empty);
             string[] Servers = SrvListFull.Split(new char[] { '{' });
-            int ctr01 = 0;
-            string[] strArrays = Servers;
-            pb_loadsrvlist.Visible = true;
-            Cursor.Current = Cursors.WaitCursor;
-                for (int i = 0; i < (int)strArrays.Length; i++)
+            JsonTextReader reader = new JsonTextReader(new StringReader(Encoding.UTF8.GetString(raw1)));
+            int counter = 0;
+            string[,] serverliste = new string[Servers.Length, 6];
+            while (reader.Read())
+            {
+                if (reader.Value != null)
                 {
-                pb_loadsrvlist.Maximum = (int)strArrays.Length;
-                pb_loadsrvlist.Value = i+1;
-                    string ch = strArrays[i];
-                    string[] ServerValues = Servers[ctr01].Split(new char[] { ':' });
-                    ctr01++;
-                    int ctr02 = 0;
-                    string[] strArrays1 = ServerValues;
-                    for (int j = 0; j < (int)strArrays1.Length; j++)
+                    counter = int.Parse(reader.Path.Substring(1, reader.Path.IndexOf(']') - 1));
+                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].port") && reader.Value.ToString() != "port")
                     {
-                        string st = strArrays1[j];
-                        string srvval = ServerValues[ctr02].Replace(" ", "");
-                        srvval = srvval.Replace("\"", string.Empty);
-                        if (srvval.Contains("ip"))
-                        {
-                            ipaddress = ServerValues[ctr02 + 1].Substring(1, ServerValues[ctr02 + 1].IndexOf(',') - 2).Replace("\"", string.Empty);
-                        }
-                        if (srvval.Contains("port"))
-                        {
-                            port = ServerValues[ctr02 + 1].Substring(1, ServerValues[ctr02 + 1].IndexOf(',')).Replace("\"", string.Empty).Replace(",", "");
-                            string url = string.Concat(new string[] { ipaddress, ":", port});
-                            if (ping("http://"+url+"/info"))
-                            {
-                                drp_srvlist.Items.Add(url);
-                                drp_srvlist.SelectedIndex = 0;
-                            }
-                        }
-                        ctr02++;
+                        serverliste[counter, 1] = reader.Value.ToString();
                     }
-                    //int srvcount = strArrays.GetLength(0) - 1;
-                    //if (i == srvcount) {
-                    //    result = true;
-                    //}
+                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].flag") && reader.Value.ToString() != "flag")
+                    {
+                        serverliste[counter, 2] = reader.Value.ToString();
+                    }
+                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].platform") && reader.Value.ToString() != "platform")
+                    {
+                        serverliste[counter, 3] = reader.Value.ToString();
+                    }
+                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].type") && reader.Value.ToString() != "type")
+                    {
+                        serverliste[counter, 4] = reader.Value.ToString();
+                    }
+                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].hidden") && reader.Value.ToString() != "hidden")
+                    {
+                        serverliste[counter, 5] = reader.Value.ToString();
+                    }
+                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].ip") && reader.Value.ToString() != "ip")
+                    {
+                        serverliste[counter, 0] = reader.Value.ToString();
+                    }
                 }
-            pb_loadsrvlist.Visible = false;
-            Cursor.Current = Cursors.Default;
-
-
-           
-            //string result = "fertig";
-            //var tdelay = Task.
-            //await tdelay.GetResult;
-            //return tdelay.GetAwaiter();
-            return true;
-        }   
-        private async void btn_loadsrvlist_Click(object sender, EventArgs e)
+            }
+            return serverliste;
+        }
+            static class srvlistcl
+        {
+            public static string[,] srvlist = Loadsrvlist();
+        }
+            public async void btn_loadsrvlist_Click(object sender, EventArgs e)
 		{
             pic_yoshi.Enabled = true;
             //var t1 = await Task.Run(() => Loadsrvlist());
-            Loadsrvlist();
+            //string[,] srvlist = Loadsrvlist();
+            int counter2 = 0;
+            drp_srvlist.Items.Clear();
+            pb_loadsrvlist.Visible = true;
+            Cursor.Current = Cursors.WaitCursor;
+            foreach (string s in srvlistcl.srvlist)
+
+            {
+                if (srvlistcl.srvlist[counter2, 0] != null)
+                {
+                    pb_loadsrvlist.Maximum = (int)srvlistcl.srvlist.GetLength(0);
+                    pb_loadsrvlist.Value = counter2 + 1;
+                    string url = null;
+                    if (srvlistcl.srvlist[counter2,4] == "dotnet")
+                    {
+                        url = "http://" + srvlistcl.srvlist[counter2, 0] + ":" + srvlistcl.srvlist[counter2, 1]+"/";
+                    }
+                    else
+                    {
+                        url = "http://" + srvlistcl.srvlist[counter2, 0] + ":" + srvlistcl.srvlist[counter2, 1] + "/info";
+                    }
+                    if (ping(url))
+                    {
+                        drp_srvlist.Items.Add(counter2+":"+srvlistcl.srvlist[counter2, 0] + ":" + srvlistcl.srvlist[counter2, 1]);
+                    }
+                    counter2++;
+                }
+            }
+            //drp_srvlist.SelectedIndex = 0;
+            pb_loadsrvlist.Visible = false;
+            Cursor.Current = Cursors.Default;
             //pic_yoshi.Enabled = false;
-		}
+        }
 
 		private void btn_winpcapdl_Click(object sender, EventArgs e)
 		{
@@ -178,7 +195,18 @@ namespace LANPlayClient
 		private void drp_srvlist_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			WebClient wc = new WebClient();
-			string url = "http://"+this.drp_srvlist.SelectedItem.ToString()+"/info";
+            string chosenitem = drp_srvlist.SelectedItem.ToString();
+            int elementid = int.Parse(chosenitem.Substring(0, chosenitem.IndexOf(':')));
+            string item = srvlistcl.srvlist[elementid, 0] +":"+ srvlistcl.srvlist[elementid, 1];
+            string url = null;
+            if (srvlistcl.srvlist[elementid,4] == "dotnet")
+            {
+                url = "http://" + item;
+            } 
+            else
+            {
+                url = "http://" + item + "/info";
+            }
 			Stopwatch timer = new Stopwatch();
 			timer.Start();
 			byte[] raw = wc.DownloadData(url);
@@ -189,29 +217,40 @@ namespace LANPlayClient
 			long elapsedMilliseconds = timer.ElapsedMilliseconds;
 			lblPing.Text = string.Concat(elapsedMilliseconds.ToString(), " ms");
 			timer.Reset();
-			if (!webData.Contains("rust"))
+			if (webData.Contains("rust"))
 			{
-				string srvver = DataArray[2].Substring(1, DataArray[2].IndexOf('\"', 1) - 1);
-				string useronline = DataArray[1].Substring(0, DataArray[1].IndexOf(","));
-				this.lbl_srvstatus.Text = "online";
-				this.lbl_srvver.Text = srvver;
-				this.lbl_usract.Text = "N/A";
-				this.lbl_usridl.Text = "N/A";
-				this.lbl_usronl.Text = useronline;
-				this.lbl_srvtyp.Text = "N/A";
-			}
+                this.lbl_srvtyp.Text = srvlistcl.srvlist[elementid, 4];
+                string srvver = DataArray[3].Substring(1, DataArray[3].IndexOf('\"', 1) - 1);
+                this.lbl_srvstatus.Text = "online";
+                int useronline = int.Parse(DataArray[1].Substring(0, DataArray[1].IndexOf(",")));
+                int useridle = int.Parse(DataArray[2].Substring(0, DataArray[2].IndexOf(",")));
+                this.lbl_usronl.Text = useronline.ToString();
+                this.lbl_usridl.Text = useridle.ToString();
+                this.lbl_usract.Text = (useronline - useridle).ToString();
+                this.lbl_srvver.Text = srvver;
+            }
+            else if(srvlistcl.srvlist[elementid,4] == "dotnet")
+            {
+                string srvver = DataArray[2].Substring(1, DataArray[2].IndexOf('\"', 1) - 1);
+                string useronline = DataArray[5].Substring(0,DataArray[5].IndexOf('}'));
+                this.lbl_srvstatus.Text = "online";
+                this.lbl_srvver.Text = "N/A";
+                this.lbl_usract.Text = "N/A";
+                this.lbl_usridl.Text = "N/A";
+                this.lbl_usronl.Text = useronline;
+                this.lbl_srvtyp.Text = srvlistcl.srvlist[elementid, 4];
+            }
 			else
 			{
-				this.lbl_srvtyp.Text = "Rust";
-				string srvver = DataArray[3].Substring(1, DataArray[3].IndexOf('\"', 1) - 1);
-				this.lbl_srvstatus.Text = "online";
-				int useronline = int.Parse(DataArray[1].Substring(0, DataArray[1].IndexOf(",")));
-				int useridle = int.Parse(DataArray[2].Substring(0, DataArray[2].IndexOf(",")));
-				this.lbl_usronl.Text = useronline.ToString();
-				this.lbl_usridl.Text = useridle.ToString();
-				this.lbl_usract.Text = (useronline - useridle).ToString();
-				this.lbl_srvver.Text = srvver;
-			}
+                string srvver = DataArray[2].Substring(1, DataArray[2].IndexOf('\"', 1) - 1);
+                string useronline = DataArray[1].Substring(0, DataArray[1].IndexOf(","));
+                this.lbl_srvstatus.Text = "online";
+                this.lbl_srvver.Text = srvver;
+                this.lbl_usract.Text = "N/A";
+                this.lbl_usridl.Text = "N/A";
+                this.lbl_usronl.Text = useronline;
+                this.lbl_srvtyp.Text = srvlistcl.srvlist[elementid, 4];
+            }
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -299,6 +338,7 @@ namespace LANPlayClient
             this.btn_winpcapdl = new System.Windows.Forms.Button();
             this.pic_yoshi = new System.Windows.Forms.PictureBox();
             this.pb_loadsrvlist = new System.Windows.Forms.ProgressBar();
+            this.quickConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grp_srvstatus.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_yoshi)).BeginInit();
@@ -523,6 +563,7 @@ namespace LANPlayClient
             // 
             this.mnu_Datei.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_einstellungen,
+            this.quickConnectToolStripMenuItem,
             this.mnu_beenden});
             this.mnu_Datei.Name = "mnu_Datei";
             this.mnu_Datei.Size = new System.Drawing.Size(46, 20);
@@ -531,14 +572,14 @@ namespace LANPlayClient
             // mnu_einstellungen
             // 
             this.mnu_einstellungen.Name = "mnu_einstellungen";
-            this.mnu_einstellungen.Size = new System.Drawing.Size(145, 22);
+            this.mnu_einstellungen.Size = new System.Drawing.Size(180, 22);
             this.mnu_einstellungen.Text = "Einstellungen";
             this.mnu_einstellungen.Click += new System.EventHandler(this.mnu_einstellungen_Click);
             // 
             // mnu_beenden
             // 
             this.mnu_beenden.Name = "mnu_beenden";
-            this.mnu_beenden.Size = new System.Drawing.Size(145, 22);
+            this.mnu_beenden.Size = new System.Drawing.Size(180, 22);
             this.mnu_beenden.Text = "Beenden";
             this.mnu_beenden.Click += new System.EventHandler(this.mnu_beenden_Click);
             // 
@@ -572,7 +613,14 @@ namespace LANPlayClient
             this.pb_loadsrvlist.TabIndex = 12;
             this.pb_loadsrvlist.Visible = false;
             // 
-            // LANPlayClient
+            // quickConnectToolStripMenuItem
+            // 
+            this.quickConnectToolStripMenuItem.Name = "quickConnectToolStripMenuItem";
+            this.quickConnectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quickConnectToolStripMenuItem.Text = "Quick Connect";
+            this.quickConnectToolStripMenuItem.Click += new System.EventHandler(this.quickConnectToolStripMenuItem_Click);
+            // 
+            // frm_LANPlayClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -589,7 +637,7 @@ namespace LANPlayClient
             this.Controls.Add(this.lbl_firststep);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "LANPlayClient";
+            this.Name = "frm_LANPlayClient";
             this.Text = "LAN Play Client GUI";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.grp_srvstatus.ResumeLayout(false);
@@ -622,7 +670,7 @@ namespace LANPlayClient
 				int reg_httptimeout = int.Parse(key.GetValue("httptimeout").ToString());
 				request.Timeout = reg_httptimeout;
 				request.AllowAutoRedirect = false;
-				request.Method = "HEAD";
+				request.Method = "GET";
 				using (WebResponse response = request.GetResponse())
 				{
 					flag = true;
@@ -634,5 +682,10 @@ namespace LANPlayClient
 			}
 			return flag;
 		}
+
+        private void quickConnectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            (new frm_quickconnect()).Show();
+        }
     }
 }
