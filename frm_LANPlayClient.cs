@@ -302,7 +302,7 @@ namespace LANPlayClient
 			}
 			if (Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\WinPcap") == null)
 			{
-				MessageBox.Show("WinPCAP fehlt! Lanplay kann nicht gestartet werden!", "WinPCAP fehlt", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+				MessageBox.Show("WinPCAP missing! Lanplay could not be started!", "WinPCAP missing", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 				this.btn_connectserver.Enabled = false;
 				this.btn_winpcapdl.Visible = true;
 			}
@@ -334,11 +334,11 @@ namespace LANPlayClient
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnu_Datei = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_einstellungen = new System.Windows.Forms.ToolStripMenuItem();
+            this.quickConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_beenden = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_winpcapdl = new System.Windows.Forms.Button();
             this.pic_yoshi = new System.Windows.Forms.PictureBox();
             this.pb_loadsrvlist = new System.Windows.Forms.ProgressBar();
-            this.quickConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grp_srvstatus.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_yoshi)).BeginInit();
@@ -350,9 +350,10 @@ namespace LANPlayClient
             this.lbl_firststep.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_firststep.Location = new System.Drawing.Point(23, 46);
             this.lbl_firststep.Name = "lbl_firststep";
-            this.lbl_firststep.Size = new System.Drawing.Size(139, 19);
+            this.lbl_firststep.Size = new System.Drawing.Size(126, 19);
             this.lbl_firststep.TabIndex = 1;
-            this.lbl_firststep.Text = "1. Serverliste laden";
+            this.lbl_firststep.Text = "1. Load Serverlist";
+            this.lbl_firststep.Click += new System.EventHandler(this.lbl_firststep_Click);
             // 
             // drp_srvlist
             // 
@@ -370,7 +371,7 @@ namespace LANPlayClient
             this.btn_loadsrvlist.Name = "btn_loadsrvlist";
             this.btn_loadsrvlist.Size = new System.Drawing.Size(103, 23);
             this.btn_loadsrvlist.TabIndex = 3;
-            this.btn_loadsrvlist.Text = "Serverliste laden";
+            this.btn_loadsrvlist.Text = "Load Serverlist";
             this.btn_loadsrvlist.UseVisualStyleBackColor = true;
             this.btn_loadsrvlist.Click += new System.EventHandler(this.btn_loadsrvlist_Click);
             // 
@@ -380,9 +381,9 @@ namespace LANPlayClient
             this.lbl_secondstep.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_secondstep.Location = new System.Drawing.Point(24, 69);
             this.lbl_secondstep.Name = "lbl_secondstep";
-            this.lbl_secondstep.Size = new System.Drawing.Size(146, 19);
+            this.lbl_secondstep.Size = new System.Drawing.Size(112, 19);
             this.lbl_secondstep.TabIndex = 4;
-            this.lbl_secondstep.Text = "2. Server auswählen";
+            this.lbl_secondstep.Text = "2. select Server";
             // 
             // lbl_thirdstep
             // 
@@ -390,9 +391,9 @@ namespace LANPlayClient
             this.lbl_thirdstep.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_thirdstep.Location = new System.Drawing.Point(39, 645);
             this.lbl_thirdstep.Name = "lbl_thirdstep";
-            this.lbl_thirdstep.Size = new System.Drawing.Size(95, 19);
+            this.lbl_thirdstep.Size = new System.Drawing.Size(81, 19);
             this.lbl_thirdstep.TabIndex = 5;
-            this.lbl_thirdstep.Text = "3. Verbinden";
+            this.lbl_thirdstep.Text = "3. Connect";
             // 
             // btn_connectserver
             // 
@@ -400,7 +401,7 @@ namespace LANPlayClient
             this.btn_connectserver.Name = "btn_connectserver";
             this.btn_connectserver.Size = new System.Drawing.Size(75, 41);
             this.btn_connectserver.TabIndex = 6;
-            this.btn_connectserver.Text = "Verbinde mit Server";
+            this.btn_connectserver.Text = "Connect to Server";
             this.btn_connectserver.UseVisualStyleBackColor = true;
             this.btn_connectserver.Click += new System.EventHandler(this.btn_connectserver_Click);
             // 
@@ -572,14 +573,21 @@ namespace LANPlayClient
             // mnu_einstellungen
             // 
             this.mnu_einstellungen.Name = "mnu_einstellungen";
-            this.mnu_einstellungen.Size = new System.Drawing.Size(180, 22);
+            this.mnu_einstellungen.Size = new System.Drawing.Size(153, 22);
             this.mnu_einstellungen.Text = "Einstellungen";
             this.mnu_einstellungen.Click += new System.EventHandler(this.mnu_einstellungen_Click);
+            // 
+            // quickConnectToolStripMenuItem
+            // 
+            this.quickConnectToolStripMenuItem.Name = "quickConnectToolStripMenuItem";
+            this.quickConnectToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.quickConnectToolStripMenuItem.Text = "Quick Connect";
+            this.quickConnectToolStripMenuItem.Click += new System.EventHandler(this.quickConnectToolStripMenuItem_Click);
             // 
             // mnu_beenden
             // 
             this.mnu_beenden.Name = "mnu_beenden";
-            this.mnu_beenden.Size = new System.Drawing.Size(180, 22);
+            this.mnu_beenden.Size = new System.Drawing.Size(153, 22);
             this.mnu_beenden.Text = "Beenden";
             this.mnu_beenden.Click += new System.EventHandler(this.mnu_beenden_Click);
             // 
@@ -612,13 +620,6 @@ namespace LANPlayClient
             this.pb_loadsrvlist.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.pb_loadsrvlist.TabIndex = 12;
             this.pb_loadsrvlist.Visible = false;
-            // 
-            // quickConnectToolStripMenuItem
-            // 
-            this.quickConnectToolStripMenuItem.Name = "quickConnectToolStripMenuItem";
-            this.quickConnectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.quickConnectToolStripMenuItem.Text = "Quick Connect";
-            this.quickConnectToolStripMenuItem.Click += new System.EventHandler(this.quickConnectToolStripMenuItem_Click);
             // 
             // frm_LANPlayClient
             // 
@@ -686,6 +687,11 @@ namespace LANPlayClient
         private void quickConnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             (new frm_quickconnect()).Show();
+        }
+
+        private void lbl_firststep_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

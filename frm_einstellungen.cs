@@ -156,9 +156,9 @@ namespace LANPlayClient
             this.lbl_serverurl.AutoSize = true;
             this.lbl_serverurl.Location = new System.Drawing.Point(12, 34);
             this.lbl_serverurl.Name = "lbl_serverurl";
-            this.lbl_serverurl.Size = new System.Drawing.Size(81, 13);
+            this.lbl_serverurl.Size = new System.Drawing.Size(75, 13);
             this.lbl_serverurl.TabIndex = 3;
-            this.lbl_serverurl.Text = "Serverliste URL";
+            this.lbl_serverurl.Text = "Serverlist URL";
             // 
             // btn_save
             // 
@@ -185,9 +185,9 @@ namespace LANPlayClient
             this.lbl_cldir.AutoSize = true;
             this.lbl_cldir.Location = new System.Drawing.Point(12, 58);
             this.lbl_cldir.Name = "lbl_cldir";
-            this.lbl_cldir.Size = new System.Drawing.Size(90, 13);
+            this.lbl_cldir.Size = new System.Drawing.Size(78, 13);
             this.lbl_cldir.TabIndex = 6;
-            this.lbl_cldir.Text = "Client Speicherort";
+            this.lbl_cldir.Text = "Client Directory";
             // 
             // btn_choosedir
             // 
@@ -229,10 +229,10 @@ namespace LANPlayClient
             this.rb_standard.AutoSize = true;
             this.rb_standard.Location = new System.Drawing.Point(138, 83);
             this.rb_standard.Name = "rb_standard";
-            this.rb_standard.Size = new System.Drawing.Size(68, 17);
+            this.rb_standard.Size = new System.Drawing.Size(59, 17);
             this.rb_standard.TabIndex = 11;
             this.rb_standard.TabStop = true;
-            this.rb_standard.Text = "Standard";
+            this.rb_standard.Text = "Default";
             this.rb_standard.UseVisualStyleBackColor = true;
             this.rb_standard.CheckedChanged += new System.EventHandler(this.rb_standard_CheckedChanged);
             // 
@@ -280,7 +280,7 @@ namespace LANPlayClient
             this.Controls.Add(this.txt_httptimeout);
             this.Controls.Add(this.lbl_httptimeout);
             this.Name = "frm_einstellungen";
-            this.Text = "Einstellungen";
+            this.Text = "Settings";
             this.Load += new System.EventHandler(this.frm_einstellungen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
