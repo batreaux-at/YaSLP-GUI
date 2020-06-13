@@ -381,9 +381,10 @@ namespace LANPlayClient
             this.lbl_secondstep.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_secondstep.Location = new System.Drawing.Point(24, 69);
             this.lbl_secondstep.Name = "lbl_secondstep";
-            this.lbl_secondstep.Size = new System.Drawing.Size(112, 19);
+            this.lbl_secondstep.Size = new System.Drawing.Size(114, 19);
             this.lbl_secondstep.TabIndex = 4;
-            this.lbl_secondstep.Text = "2. select Server";
+            this.lbl_secondstep.Text = "2. Select Server";
+            this.lbl_secondstep.Click += new System.EventHandler(this.lbl_secondstep_Click);
             // 
             // lbl_thirdstep
             // 
@@ -429,7 +430,7 @@ namespace LANPlayClient
             this.grp_srvstatus.Size = new System.Drawing.Size(305, 162);
             this.grp_srvstatus.TabIndex = 7;
             this.grp_srvstatus.TabStop = false;
-            this.grp_srvstatus.Text = "Status des gewählten Servers";
+            this.grp_srvstatus.Text = "Status of selected Server";
             // 
             // lbl_ping
             // 
@@ -510,18 +511,18 @@ namespace LANPlayClient
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(7, 117);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 19);
+            this.label4.Size = new System.Drawing.Size(79, 19);
             this.label4.TabIndex = 4;
-            this.label4.Text = "User aktiv:";
+            this.label4.Text = "User activ:";
             // 
             // lbl_txt_usridle
             // 
             this.lbl_txt_usridle.AutoSize = true;
             this.lbl_txt_usridle.Location = new System.Drawing.Point(7, 98);
             this.lbl_txt_usridle.Name = "lbl_txt_usridle";
-            this.lbl_txt_usridle.Size = new System.Drawing.Size(93, 19);
+            this.lbl_txt_usridle.Size = new System.Drawing.Size(72, 19);
             this.lbl_txt_usridle.TabIndex = 3;
-            this.lbl_txt_usridle.Text = "User inaktiv:";
+            this.lbl_txt_usridle.Text = "User idle:";
             // 
             // lbl_txt_usronl
             // 
@@ -537,9 +538,9 @@ namespace LANPlayClient
             this.lbl_txt_srvtyp.AutoSize = true;
             this.lbl_txt_srvtyp.Location = new System.Drawing.Point(7, 43);
             this.lbl_txt_srvtyp.Name = "lbl_txt_srvtyp";
-            this.lbl_txt_srvtyp.Size = new System.Drawing.Size(80, 19);
+            this.lbl_txt_srvtyp.Size = new System.Drawing.Size(88, 19);
             this.lbl_txt_srvtyp.TabIndex = 1;
-            this.lbl_txt_srvtyp.Text = "Servertyp:";
+            this.lbl_txt_srvtyp.Text = "Servertype:";
             // 
             // lbl_txt_srvstatus
             // 
@@ -567,14 +568,14 @@ namespace LANPlayClient
             this.quickConnectToolStripMenuItem,
             this.mnu_beenden});
             this.mnu_Datei.Name = "mnu_Datei";
-            this.mnu_Datei.Size = new System.Drawing.Size(46, 20);
-            this.mnu_Datei.Text = "Datei";
+            this.mnu_Datei.Size = new System.Drawing.Size(43, 20);
+            this.mnu_Datei.Text = "Data";
             // 
             // mnu_einstellungen
             // 
             this.mnu_einstellungen.Name = "mnu_einstellungen";
-            this.mnu_einstellungen.Size = new System.Drawing.Size(153, 22);
-            this.mnu_einstellungen.Text = "Einstellungen";
+            this.mnu_einstellungen.Size = new System.Drawing.Size(180, 22);
+            this.mnu_einstellungen.Text = "Settings";
             this.mnu_einstellungen.Click += new System.EventHandler(this.mnu_einstellungen_Click);
             // 
             // quickConnectToolStripMenuItem
@@ -587,8 +588,8 @@ namespace LANPlayClient
             // mnu_beenden
             // 
             this.mnu_beenden.Name = "mnu_beenden";
-            this.mnu_beenden.Size = new System.Drawing.Size(153, 22);
-            this.mnu_beenden.Text = "Beenden";
+            this.mnu_beenden.Size = new System.Drawing.Size(180, 22);
+            this.mnu_beenden.Text = "Close";
             this.mnu_beenden.Click += new System.EventHandler(this.mnu_beenden_Click);
             // 
             // btn_winpcapdl
@@ -690,6 +691,11 @@ namespace LANPlayClient
         }
 
         private void lbl_firststep_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_secondstep_Click(object sender, EventArgs e)
         {
 
         }
