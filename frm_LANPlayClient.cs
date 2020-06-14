@@ -97,49 +97,98 @@ namespace LANPlayClient
 		}
         static string[,] Loadsrvlist()
         {
-            byte[] raw1 = (new WebClient()).DownloadData("https://raw.githubusercontent.com/GreatWizard/lan-play-status/master/public/data/servers.json");
+            RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
+
+            byte[] raw1 = (new WebClient()).DownloadData(key.GetValue("serverlisturl").ToString());
             string SrvListFull = Encoding.UTF8.GetString(raw1).Replace("[", string.Empty).Replace("]", string.Empty).Replace("\"", string.Empty).Replace(" ", string.Empty).Replace("}", string.Empty);
             string[] Servers = SrvListFull.Split(new char[] { '{' });
             JsonTextReader reader = new JsonTextReader(new StringReader(Encoding.UTF8.GetString(raw1)));
             int counter = 0;
-            string[,] serverliste = new string[Servers.Length, 6];
+            int servercount = 0;
+            if (Servers[0] == "" && Servers[1] == "servers:")
+            {
+                servercount = Servers.Length - 2;
+            } else
+            {
+                servercount = Servers.Length;
+            }
+            string[,] serverliste = new string[servercount, 6];
             while (reader.Read())
             {
                 if (reader.Value != null)
                 {
-                    counter = int.Parse(reader.Path.Substring(1, reader.Path.IndexOf(']') - 1));
-                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].port") && reader.Value.ToString() != "port")
+                    //MessageBox.Show(reader.Path);
+                    if (reader.Path != "[0].servers")
                     {
-                        serverliste[counter, 1] = reader.Value.ToString();
-                    }
-                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].flag") && reader.Value.ToString() != "flag")
-                    {
-                        serverliste[counter, 2] = reader.Value.ToString();
-                    }
-                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].platform") && reader.Value.ToString() != "platform")
-                    {
-                        serverliste[counter, 3] = reader.Value.ToString();
-                    }
-                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].type") && reader.Value.ToString() != "type")
-                    {
-                        serverliste[counter, 4] = reader.Value.ToString();
-                    }
-                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].hidden") && reader.Value.ToString() != "hidden")
-                    {
-                        serverliste[counter, 5] = reader.Value.ToString();
-                    }
-                    if (reader.Path.ToString() == ("[" + counter.ToString() + "].ip") && reader.Value.ToString() != "ip")
-                    {
-                        serverliste[counter, 0] = reader.Value.ToString();
+                        int posopen = 0;
+                        int posclose = 0;
+                        if (reader.Path.StartsWith("[0].servers"))
+                        {
+                            posclose = reader.Path.IndexOf(']', 3);
+                            posopen = reader.Path.IndexOf('[', 3);
+                        } else
+                        {
+                            posclose = reader.Path.IndexOf(']');
+                            posopen = reader.Path.IndexOf('[');
+                        }
+                            counter = int.Parse(reader.Path.Substring(posopen+1,posclose-posopen - 1));
+                        string pathport = "";
+                        string pathflag = "";
+                        string pathplatform = "";
+                        string pathtype = "";
+                        string pathhidden = "";
+                        string pathip = "";
+
+                        if (reader.Path.StartsWith("[0].servers"))
+                        {
+                            pathport = "[0].servers[" + counter.ToString() + "].port";
+                            pathflag = "[0].servers[" + counter.ToString() + "].flag";
+                            pathplatform = "[0].servers[" + counter.ToString() + "].platform";
+                            pathtype = "[0].servers[" + counter.ToString() + "].type";
+                            pathhidden = "[0].servers[" + counter.ToString() + "].hidden";
+                            pathip = "[0].servers[" + counter.ToString() + "].ip";
+                        } else
+                        {
+                            pathport = "[" + counter.ToString() + "].port";
+                            pathflag = "[" + counter.ToString() + "].flag";
+                            pathplatform = "[" + counter.ToString() + "].platform";
+                            pathtype = "[" + counter.ToString() + "].type";
+                            pathhidden = "[" + counter.ToString() + "].hidden";
+                            pathip = "[" + counter.ToString() + "].ip";
+                        }
+                        if (reader.Path.ToString() == (pathport) && reader.Value.ToString() != "port")
+                        {
+                            serverliste[counter, 1] = reader.Value.ToString();
+                        }
+                        if (reader.Path.ToString() == (pathflag) && reader.Value.ToString() != "flag")
+                        {
+                            serverliste[counter, 2] = reader.Value.ToString();
+                        }
+                        if (reader.Path.ToString() == (pathplatform) && reader.Value.ToString() != "platform")
+                        {
+                            serverliste[counter, 3] = reader.Value.ToString();
+                        }
+                        if (reader.Path.ToString() == (pathtype) && reader.Value.ToString() != "type")
+                        {
+                            serverliste[counter, 4] = reader.Value.ToString();
+                        }
+                        if (reader.Path.ToString() == (pathhidden) && reader.Value.ToString() != "hidden")
+                        {
+                            serverliste[counter, 5] = reader.Value.ToString();
+                        }
+                        if (reader.Path.ToString() == (pathip) && reader.Value.ToString() != "ip")
+                        {
+                            serverliste[counter, 0] = reader.Value.ToString();
+                        }
                     }
                 }
             }
             return serverliste;
         }
             static class srvlistcl
-        {
-            public static string[,] srvlist = Loadsrvlist();
-        }
+            {
+                public static string[,] srvlist = Loadsrvlist();
+            }
             public async void btn_loadsrvlist_Click(object sender, EventArgs e)
 		{
             pic_yoshi.Enabled = true;
@@ -152,24 +201,27 @@ namespace LANPlayClient
             foreach (string s in srvlistcl.srvlist)
 
             {
-                if (srvlistcl.srvlist[counter2, 0] != null)
+                if (counter2 < srvlistcl.srvlist.GetLength(0))
                 {
-                    pb_loadsrvlist.Maximum = (int)srvlistcl.srvlist.GetLength(0);
-                    pb_loadsrvlist.Value = counter2 + 1;
-                    string url = null;
-                    if (srvlistcl.srvlist[counter2,4] == "dotnet")
+                    if (srvlistcl.srvlist[counter2, 0] != null)
                     {
-                        url = "http://" + srvlistcl.srvlist[counter2, 0] + ":" + srvlistcl.srvlist[counter2, 1]+"/";
+                        pb_loadsrvlist.Maximum = (int)srvlistcl.srvlist.GetLength(0);
+                        pb_loadsrvlist.Value = counter2 + 1;
+                        string url = null;
+                        if (srvlistcl.srvlist[counter2, 4] == "dotnet")
+                        {
+                            url = "http://" + srvlistcl.srvlist[counter2, 0] + ":" + srvlistcl.srvlist[counter2, 1] + "/";
+                        }
+                        else
+                        {
+                            url = "http://" + srvlistcl.srvlist[counter2, 0] + ":" + srvlistcl.srvlist[counter2, 1] + "/info";
+                        }
+                        if (ping(url))
+                        {
+                            drp_srvlist.Items.Add(counter2 + ":" + srvlistcl.srvlist[counter2, 0] + ":" + srvlistcl.srvlist[counter2, 1]);
+                        }
+                        counter2++;
                     }
-                    else
-                    {
-                        url = "http://" + srvlistcl.srvlist[counter2, 0] + ":" + srvlistcl.srvlist[counter2, 1] + "/info";
-                    }
-                    if (ping(url))
-                    {
-                        drp_srvlist.Items.Add(counter2+":"+srvlistcl.srvlist[counter2, 0] + ":" + srvlistcl.srvlist[counter2, 1]);
-                    }
-                    counter2++;
                 }
             }
             //drp_srvlist.SelectedIndex = 0;

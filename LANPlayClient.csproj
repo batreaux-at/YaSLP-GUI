@@ -104,11 +104,11 @@
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="quickconnect.cs">
+    <Compile Include="frm_quickconnect.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="quickconnect.Designer.cs">
-      <DependentUpon>quickconnect.cs</DependentUpon>
+    <Compile Include="frm_quickconnect.Designer.cs">
+      <DependentUpon>frm_quickconnect.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="frm_update.resx">
       <DependentUpon>frm_update.cs</DependentUpon>
@@ -124,8 +124,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="quickconnect.resx">
-      <DependentUpon>quickconnect.cs</DependentUpon>
+    <EmbeddedResource Include="frm_quickconnect.resx">
+      <DependentUpon>frm_quickconnect.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
