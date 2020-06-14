@@ -32,6 +32,8 @@ namespace LANPlayClient
         private RadioButton rb_standard;
         private RadioButton rb_acnh;
         private RadioButton rb_manual;
+        private Button btn_r3n3at;
+        private Button btn_grw;
         private Button btn_choosedir;
 
 		public frm_einstellungen()
@@ -62,6 +64,7 @@ namespace LANPlayClient
             if (rb_manual.Checked) { parammode = 3; }
             key.SetValue("Parametersmode", parammode);
             base.Close();
+            Application.Restart();
 		}
 
 		protected override void Dispose(bool disposing)
@@ -126,6 +129,8 @@ namespace LANPlayClient
             this.rb_standard = new System.Windows.Forms.RadioButton();
             this.rb_acnh = new System.Windows.Forms.RadioButton();
             this.rb_manual = new System.Windows.Forms.RadioButton();
+            this.btn_r3n3at = new System.Windows.Forms.Button();
+            this.btn_grw = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl_httptimeout
@@ -260,11 +265,33 @@ namespace LANPlayClient
             this.rb_manual.UseVisualStyleBackColor = true;
             this.rb_manual.CheckedChanged += new System.EventHandler(this.rb_manual_CheckedChanged);
             // 
+            // btn_r3n3at
+            // 
+            this.btn_r3n3at.Location = new System.Drawing.Point(332, 28);
+            this.btn_r3n3at.Name = "btn_r3n3at";
+            this.btn_r3n3at.Size = new System.Drawing.Size(75, 23);
+            this.btn_r3n3at.TabIndex = 14;
+            this.btn_r3n3at.Text = "r3n3.at";
+            this.btn_r3n3at.UseVisualStyleBackColor = true;
+            this.btn_r3n3at.Click += new System.EventHandler(this.btn_r3n3at_Click);
+            // 
+            // btn_grw
+            // 
+            this.btn_grw.Location = new System.Drawing.Point(414, 28);
+            this.btn_grw.Name = "btn_grw";
+            this.btn_grw.Size = new System.Drawing.Size(75, 23);
+            this.btn_grw.TabIndex = 15;
+            this.btn_grw.Text = "GreatWizard";
+            this.btn_grw.UseVisualStyleBackColor = true;
+            this.btn_grw.Click += new System.EventHandler(this.btn_grw_Click);
+            // 
             // frm_einstellungen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 190);
+            this.ClientSize = new System.Drawing.Size(512, 190);
+            this.Controls.Add(this.btn_grw);
+            this.Controls.Add(this.btn_r3n3at);
             this.Controls.Add(this.rb_manual);
             this.Controls.Add(this.rb_acnh);
             this.Controls.Add(this.rb_standard);
@@ -384,6 +411,16 @@ namespace LANPlayClient
                     txt_clparam.Enabled = true;
                     break;
             }
+        }
+
+        private void btn_r3n3at_Click(object sender, EventArgs e)
+        {
+            txt_serverlisturl.Text = "http://nut.r3n3.at/jsonlist.php";
+        }
+
+        private void btn_grw_Click(object sender, EventArgs e)
+        {
+        txt_serverlisturl.Text = "https://raw.githubusercontent.com/GreatWizard/lan-play-status/master/public/data/servers.json";
         }
     }
 }
