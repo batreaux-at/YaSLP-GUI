@@ -161,7 +161,7 @@ namespace LANPlayClient
             this.lbl_serverurl.AutoSize = true;
             this.lbl_serverurl.Location = new System.Drawing.Point(12, 34);
             this.lbl_serverurl.Name = "lbl_serverurl";
-            this.lbl_serverurl.Size = new System.Drawing.Size(75, 13);
+            this.lbl_serverurl.Size = new System.Drawing.Size(81, 13);
             this.lbl_serverurl.TabIndex = 3;
             this.lbl_serverurl.Text = "Serverlist URL";
             // 
@@ -171,7 +171,7 @@ namespace LANPlayClient
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(75, 23);
             this.btn_save.TabIndex = 4;
-            this.btn_save.Text = "Speichern";
+            this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
@@ -181,7 +181,7 @@ namespace LANPlayClient
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 5;
-            this.btn_cancel.Text = "Abbrechen";
+            this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
@@ -190,9 +190,9 @@ namespace LANPlayClient
             this.lbl_cldir.AutoSize = true;
             this.lbl_cldir.Location = new System.Drawing.Point(12, 58);
             this.lbl_cldir.Name = "lbl_cldir";
-            this.lbl_cldir.Size = new System.Drawing.Size(78, 13);
+            this.lbl_cldir.Size = new System.Drawing.Size(90, 13);
             this.lbl_cldir.TabIndex = 6;
-            this.lbl_cldir.Text = "Client Directory";
+            this.lbl_cldir.Text = "Client Location";
             // 
             // btn_choosedir
             // 
@@ -200,7 +200,7 @@ namespace LANPlayClient
             this.btn_choosedir.Name = "btn_choosedir";
             this.btn_choosedir.Size = new System.Drawing.Size(99, 23);
             this.btn_choosedir.TabIndex = 7;
-            this.btn_choosedir.Text = "Ordner wählen";
+            this.btn_choosedir.Text = "select Directory";
             this.btn_choosedir.UseVisualStyleBackColor = true;
             this.btn_choosedir.Click += new System.EventHandler(this.btn_choosedir_Click);
             // 
@@ -227,14 +227,14 @@ namespace LANPlayClient
             this.lbl_txt_parammode.Name = "lbl_txt_parammode";
             this.lbl_txt_parammode.Size = new System.Drawing.Size(119, 13);
             this.lbl_txt_parammode.TabIndex = 10;
-            this.lbl_txt_parammode.Text = "Client Parameter Modus";
+            this.lbl_txt_parammode.Text = "Client Parameter Mode";
             // 
             // rb_standard
             // 
             this.rb_standard.AutoSize = true;
             this.rb_standard.Location = new System.Drawing.Point(138, 83);
             this.rb_standard.Name = "rb_standard";
-            this.rb_standard.Size = new System.Drawing.Size(59, 17);
+            this.rb_standard.Size = new System.Drawing.Size(68, 17);
             this.rb_standard.TabIndex = 11;
             this.rb_standard.TabStop = true;
             this.rb_standard.Text = "Default";
@@ -261,7 +261,7 @@ namespace LANPlayClient
             this.rb_manual.Size = new System.Drawing.Size(61, 17);
             this.rb_manual.TabIndex = 13;
             this.rb_manual.TabStop = true;
-            this.rb_manual.Text = "manuell";
+            this.rb_manual.Text = "custom";
             this.rb_manual.UseVisualStyleBackColor = true;
             this.rb_manual.CheckedChanged += new System.EventHandler(this.rb_manual_CheckedChanged);
             // 

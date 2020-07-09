@@ -34,5 +34,10 @@ namespace LANPlayClient
         {
             Close();
         }
+
+        private void frm_quickconnect_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
