@@ -75,6 +75,7 @@ namespace LANPlayClient
         private PictureBox pic_yoshi;
         private ProgressBar pb_loadsrvlist;
         private ToolStripMenuItem quickConnectToolStripMenuItem;
+        private Label madeby;
         private Button btn_winpcapdl;
 
 		public frm_LANPlayClient()
@@ -373,6 +374,7 @@ namespace LANPlayClient
 
 		private void InitializeComponent()
 		{
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_LANPlayClient));
             this.lbl_firststep = new System.Windows.Forms.Label();
             this.drp_srvlist = new System.Windows.Forms.ComboBox();
             this.btn_loadsrvlist = new System.Windows.Forms.Button();
@@ -402,6 +404,7 @@ namespace LANPlayClient
             this.btn_winpcapdl = new System.Windows.Forms.Button();
             this.pic_yoshi = new System.Windows.Forms.PictureBox();
             this.pb_loadsrvlist = new System.Windows.Forms.ProgressBar();
+            this.madeby = new System.Windows.Forms.Label();
             this.grp_srvstatus.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_yoshi)).BeginInit();
@@ -683,11 +686,23 @@ namespace LANPlayClient
             this.pb_loadsrvlist.TabIndex = 12;
             this.pb_loadsrvlist.Visible = false;
             // 
+            // madeby
+            // 
+            this.madeby.AutoSize = true;
+            this.madeby.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.madeby.Location = new System.Drawing.Point(639, 663);
+            this.madeby.Name = "madeby";
+            this.madeby.Size = new System.Drawing.Size(141, 13);
+            this.madeby.TabIndex = 13;
+            this.madeby.Text = "Made by R3n3at and Kutaro";
+            this.madeby.Click += new System.EventHandler(this.label1_Click);
+            // 
             // frm_LANPlayClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 688);
+            this.Controls.Add(this.madeby);
             this.Controls.Add(this.pb_loadsrvlist);
             this.Controls.Add(this.pic_yoshi);
             this.Controls.Add(this.btn_winpcapdl);
@@ -699,6 +714,7 @@ namespace LANPlayClient
             this.Controls.Add(this.drp_srvlist);
             this.Controls.Add(this.lbl_firststep);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frm_LANPlayClient";
             this.Text = "LAN Play Client GUI";
@@ -749,6 +765,11 @@ namespace LANPlayClient
         private void quickConnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             (new frm_quickconnect()).Show();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
