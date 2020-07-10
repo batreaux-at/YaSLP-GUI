@@ -352,9 +352,9 @@ namespace LANPlayClient
 				downloadclient.DownloadFile(downloadurl, string.Concat(LPClientDir, "\\lan-play-win64.exe"));
 				displayupdate.Close();
 			}
-			if (Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\WinPcap") == null)
+			if (Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\WinPcap") == null && ("SYSTEM\\CurrentControlSet\\Services\\npcap\\Parameters") == null)
 			{
-				MessageBox.Show("WinPCAP fehlt! Lanplay kann nicht gestartet werden!", "WinPCAP fehlt", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+				MessageBox.Show("WinPCAP oder NPCAP fehlt! Lanplay kann nicht gestartet werden!", "WinPCAP oder NPCAP fehlt", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 				this.btn_connectserver.Enabled = false;
 				this.btn_winpcapdl.Visible = true;
 			}
