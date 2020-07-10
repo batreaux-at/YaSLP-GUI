@@ -97,7 +97,7 @@ namespace LANPlayClient
             string usesrv = srvlistcl.srvlist[elementid,0] + ":" + srvlistcl.srvlist[elementid,1];
             string serveraddress = usesrv;
             string parameters = key.GetValue("Parameters").ToString();
-			string runparameters = string.Concat(parameters, serveraddress);
+			string runparameters = string.Concat(parameters, "--relay-server-addr ", serveraddress);
 			Process.Start(exepath, runparameters);
 		}
         static string[,] Loadsrvlist()
@@ -318,7 +318,7 @@ namespace LANPlayClient
 				key.SetValue("httptimeout", "300");
 				key.SetValue("serverlisturl", "https://raw.githubusercontent.com/GreatWizard/lan-play-status/master/public/data/servers.json");
 				key.SetValue("LPClientDir", "C:\\Kutaro-R3n3-LanplayGUI");
-                key.SetValue("Parameters", " --relay-server-addr ");
+                key.SetValue("Parameters", " ");
                 key.SetValue("Parametersmode", "1");
             }
             if (key.GetValue("httptimeout") == null)
@@ -335,7 +335,7 @@ namespace LANPlayClient
             }
             if (key.GetValue("Parameters") == null)
             {
-                key.SetValue("Parameters", " --relay-server-addr ");
+                key.SetValue("Parameters", " ");
             }
             if (key.GetValue("Parametersmode") == null)
             {

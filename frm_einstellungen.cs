@@ -327,7 +327,7 @@ namespace LANPlayClient
                     rb_manual.Checked = false;
                     rb_acnh.Checked = false;
                     txt_clparam.Enabled = false;
-                    txt_clparam.Text = " --relay-server-addr ";
+                    txt_clparam.Text = " ";
                     break;
 
                 case 2:
@@ -335,7 +335,7 @@ namespace LANPlayClient
                     rb_manual.Checked = false;
                     rb_acnh.Checked = true;
                     txt_clparam.Enabled = false;
-                    txt_clparam.Text = " --pmtu 500 --relay-server-addr ";
+                    txt_clparam.Text = " --pmtu 500 ";
                     break;
 
                 case 3:
@@ -360,7 +360,7 @@ namespace LANPlayClient
                     rb_manual.Checked = false;
                     rb_acnh.Checked = false;
                     txt_clparam.Enabled = false;
-                    txt_clparam.Text = " --relay-server-addr ";
+                    txt_clparam.Text = " ";
                     break;
 
                 case 2:
@@ -368,7 +368,7 @@ namespace LANPlayClient
                     rb_manual.Checked = false;
                     rb_acnh.Checked = true;
                     txt_clparam.Enabled = false;
-                    txt_clparam.Text = " --pmtu 500 --relay-server-addr ";
+                    txt_clparam.Text = " --pmtu 500 ";
                     break;
 
                 case 3:
@@ -393,7 +393,7 @@ namespace LANPlayClient
                     rb_manual.Checked = false;
                     rb_acnh.Checked = false;
                     txt_clparam.Enabled = false;
-                    txt_clparam.Text = " --relay-server-addr ";
+                    txt_clparam.Text = " ";
                     break;
 
                 case 2:
@@ -401,7 +401,7 @@ namespace LANPlayClient
                     rb_manual.Checked = false;
                     rb_acnh.Checked = true;
                     txt_clparam.Enabled = false;
-                    txt_clparam.Text = " --pmtu 500 --relay-server-addr ";
+                    txt_clparam.Text = " --pmtu 500 ";
                     break;
 
                 case 3:
