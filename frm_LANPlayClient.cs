@@ -87,6 +87,11 @@ namespace LANPlayClient
 			RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
 			string LPClientDir = key.GetValue("LPClientDir").ToString();
 			string exepath = string.Concat(LPClientDir, "\\lan-play-win64.exe");
+            if (drp_srvlist.SelectedItem == null) 
+            {
+                MessageBox.Show("Kein Server ausgewählt!", "FEHLER", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             string chosenitem = drp_srvlist.SelectedItem.ToString();
             int elementid = int.Parse(chosenitem.Substring(0, chosenitem.IndexOf(':')));
             string usesrv = srvlistcl.srvlist[elementid,0] + ":" + srvlistcl.srvlist[elementid,1];
@@ -392,11 +397,11 @@ namespace LANPlayClient
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnu_Datei = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_einstellungen = new System.Windows.Forms.ToolStripMenuItem();
+            this.quickConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_beenden = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_winpcapdl = new System.Windows.Forms.Button();
             this.pic_yoshi = new System.Windows.Forms.PictureBox();
             this.pb_loadsrvlist = new System.Windows.Forms.ProgressBar();
-            this.quickConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grp_srvstatus.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_yoshi)).BeginInit();
@@ -630,14 +635,21 @@ namespace LANPlayClient
             // mnu_einstellungen
             // 
             this.mnu_einstellungen.Name = "mnu_einstellungen";
-            this.mnu_einstellungen.Size = new System.Drawing.Size(180, 22);
+            this.mnu_einstellungen.Size = new System.Drawing.Size(153, 22);
             this.mnu_einstellungen.Text = "Einstellungen";
             this.mnu_einstellungen.Click += new System.EventHandler(this.mnu_einstellungen_Click);
+            // 
+            // quickConnectToolStripMenuItem
+            // 
+            this.quickConnectToolStripMenuItem.Name = "quickConnectToolStripMenuItem";
+            this.quickConnectToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.quickConnectToolStripMenuItem.Text = "Quick Connect";
+            this.quickConnectToolStripMenuItem.Click += new System.EventHandler(this.quickConnectToolStripMenuItem_Click);
             // 
             // mnu_beenden
             // 
             this.mnu_beenden.Name = "mnu_beenden";
-            this.mnu_beenden.Size = new System.Drawing.Size(180, 22);
+            this.mnu_beenden.Size = new System.Drawing.Size(153, 22);
             this.mnu_beenden.Text = "Beenden";
             this.mnu_beenden.Click += new System.EventHandler(this.mnu_beenden_Click);
             // 
@@ -670,13 +682,6 @@ namespace LANPlayClient
             this.pb_loadsrvlist.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.pb_loadsrvlist.TabIndex = 12;
             this.pb_loadsrvlist.Visible = false;
-            // 
-            // quickConnectToolStripMenuItem
-            // 
-            this.quickConnectToolStripMenuItem.Name = "quickConnectToolStripMenuItem";
-            this.quickConnectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.quickConnectToolStripMenuItem.Text = "Quick Connect";
-            this.quickConnectToolStripMenuItem.Click += new System.EventHandler(this.quickConnectToolStripMenuItem_Click);
             // 
             // frm_LANPlayClient
             // 
