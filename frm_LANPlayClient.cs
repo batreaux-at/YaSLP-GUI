@@ -345,16 +345,22 @@ namespace LANPlayClient
 			}
 			if (!File.Exists(string.Concat(LPClientDir, "\\lan-play-win64.exe")))
 			{
-				string downloadurl = "https://github.com/spacemeowx2/switch-lan-play/releases/download/v0.2.1/lan-play-win64.exe";
+				string downloadurl = "https://github.com/spacemeowx2/switch-lan-play/releases/download/v0.2.3/lan-play-win64.exe";
 				WebClient downloadclient = new WebClient();
 				frm_update displayupdate = new frm_update();
 				displayupdate.Show();
 				downloadclient.DownloadFile(downloadurl, string.Concat(LPClientDir, "\\lan-play-win64.exe"));
 				displayupdate.Close();
 			}
-			if (Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\WinPcap") == null && ("SYSTEM\\CurrentControlSet\\Services\\npcap\\Parameters") == null)
+            RegistryKey npcapparam = Registry.LocalMachine.OpenSubKey("SYSTEM\\CurrentControlSet\\Services\\npcap\\Parameters");
+			if (Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\WinPcap") == null && npcapparam.GetValue("WinPcapCompatible").ToString() != "1")
 			{
-				MessageBox.Show("WinPCAP oder NPCAP fehlt! Lanplay kann nicht gestartet werden!", "WinPCAP oder NPCAP fehlt", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                string npcaperrortext = "";
+                if (npcapparam.GetValue("WinPcapCompatible").ToString() == "0")
+                {
+                    npcaperrortext = "\r\n NPCAP ist falsch konfiguriert! \r\n WinPcapCompatible: "+ npcapparam.GetValue("WinPcapCompatible").ToString();
+                }
+				MessageBox.Show("WinPCAP oder NPCAP fehlt! \r\n Lanplay kann nicht gestartet werden!" + npcaperrortext, "WinPCAP oder NPCAP fehlt", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 				this.btn_connectserver.Enabled = false;
 				this.btn_winpcapdl.Visible = true;
 			}
