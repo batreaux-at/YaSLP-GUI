@@ -351,7 +351,7 @@ namespace LANPlayClient
 			}
 			if (!File.Exists(string.Concat(LPClientDir, "\\lan-play-win64.exe")))
 			{
-				string downloadurl = "https://github.com/spacemeowx2/switch-lan-play/releases/download/v0.2.3/lan-play-win64.exe";
+				string downloadurl = "https://github.com/spacemeowx2/switch-lan-play/releases/latest/download/lan-play-win64.exe";
 				WebClient downloadclient = new WebClient();
 				frm_update displayupdate = new frm_update();
 				displayupdate.Show();
