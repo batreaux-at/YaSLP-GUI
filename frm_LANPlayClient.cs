@@ -76,6 +76,14 @@ namespace LANPlayClient
         private ProgressBar pb_loadsrvlist;
         private ToolStripMenuItem quickConnectToolStripMenuItem;
         private Label madeby;
+        private ListView listView1;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
+        private ColumnHeader columnHeader5;
+        private ColumnHeader columnHeader6;
+        private ColumnHeader columnHeader7;
         private Button btn_winpcapdl;
 
 		public frm_LANPlayClient()
@@ -195,7 +203,7 @@ namespace LANPlayClient
             {
                 public static string[,] srvlist = Loadsrvlist();
             }
-            public async void btn_loadsrvlist_Click(object sender, EventArgs e)
+            public void btn_loadsrvlist_Click(object sender, EventArgs e)
 		{
             pic_yoshi.Enabled = true;
             //var t1 = await Task.Run(() => Loadsrvlist());
@@ -405,6 +413,14 @@ namespace LANPlayClient
             this.pic_yoshi = new System.Windows.Forms.PictureBox();
             this.pb_loadsrvlist = new System.Windows.Forms.ProgressBar();
             this.madeby = new System.Windows.Forms.Label();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grp_srvstatus.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_yoshi)).BeginInit();
@@ -697,11 +713,65 @@ namespace LANPlayClient
             this.madeby.Text = "Made by R3n3at and Kutaro";
             this.madeby.Click += new System.EventHandler(this.label1_Click);
             // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7});
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(27, 96);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(438, 528);
+            this.listView1.TabIndex = 14;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Adress";
+            this.columnHeader1.Width = 180;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Online";
+            this.columnHeader2.Width = 45;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Active";
+            this.columnHeader3.Width = 45;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Idle";
+            this.columnHeader4.Width = 45;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Ping";
+            this.columnHeader5.Width = 50;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Type";
+            this.columnHeader6.Width = 100;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Flag";
+            this.columnHeader7.Width = 40;
+            // 
             // frm_LANPlayClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 688);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.madeby);
             this.Controls.Add(this.pb_loadsrvlist);
             this.Controls.Add(this.pic_yoshi);
@@ -741,19 +811,25 @@ namespace LANPlayClient
 
 		private bool ping(string url)
 		{
-			bool flag;
+			bool flag = false;
 			try
 			{
-				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-				RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
-				int reg_httptimeout = int.Parse(key.GetValue("httptimeout").ToString());
-				request.Timeout = reg_httptimeout;
-				request.AllowAutoRedirect = false;
-				request.Method = "GET";
-				using (WebResponse response = request.GetResponse())
-				{
-					flag = true;
-				}
+                //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
+                int reg_httptimeout = int.Parse(key.GetValue("httptimeout").ToString());
+                //request.Timeout = reg_httptimeout;
+                //request.AllowAutoRedirect = false;
+                //request.Method = "GET";
+                //using (WebResponse response = request.GetResponse())
+                //{
+                //	flag = true;
+                //}
+                Stopwatch stopwatch = new Stopwatch ();
+                stopwatch.Start();
+                var task = Task.Run(() => SendData(url));
+                Task.WaitAll(task);
+                stopwatch.Stop();
+                if (stopwatch.ElapsedMilliseconds < reg_httptimeout) { flag = true; }
 			}
 			catch
 			{
@@ -762,12 +838,29 @@ namespace LANPlayClient
 			return flag;
 		}
 
-        private void quickConnectToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void SendData(String Url)
+        {
+            string m_GetResponce = null;
+            var request = WebRequest.Create(Url);
+            using (var response = await request.GetResponseAsync())
+            using (var stream = new StreamReader(response.GetResponseStream()))
+                m_GetResponce = stream.ReadToEnd();
+            string Server = (Url + " " + m_GetResponce);
+            //label1.Text = Server;
+        }
+    
+
+    private void quickConnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             (new frm_quickconnect()).Show();
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
