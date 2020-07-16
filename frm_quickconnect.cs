@@ -21,7 +21,7 @@ namespace LANPlayClient
 
         private void btn_connect_Click(object sender, EventArgs e)
         {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
+            RegistryKey key = Registry.CurrentUser.CreateSubKey("Software\\YaSLP-GUI");
             string LPClientDir = key.GetValue("LPClientDir").ToString();
             string exepath = string.Concat(LPClientDir, "\\lan-play-win64.exe");
             string serveraddress = txt_srvaddr.Text;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_quickconnect));
             this.txt_srvaddr = new System.Windows.Forms.TextBox();
             this.lbl_txt_srvaddr = new System.Windows.Forms.Label();
             this.btn_connect = new System.Windows.Forms.Button();
@@ -46,9 +47,9 @@
             this.lbl_txt_srvaddr.AutoSize = true;
             this.lbl_txt_srvaddr.Location = new System.Drawing.Point(13, 12);
             this.lbl_txt_srvaddr.Name = "lbl_txt_srvaddr";
-            this.lbl_txt_srvaddr.Size = new System.Drawing.Size(78, 13);
+            this.lbl_txt_srvaddr.Size = new System.Drawing.Size(82, 13);
             this.lbl_txt_srvaddr.TabIndex = 1;
-            this.lbl_txt_srvaddr.Text = "Serveradresse:";
+            this.lbl_txt_srvaddr.Text = "Server Address:";
             // 
             // btn_connect
             // 
@@ -56,7 +57,7 @@
             this.btn_connect.Name = "btn_connect";
             this.btn_connect.Size = new System.Drawing.Size(75, 23);
             this.btn_connect.TabIndex = 2;
-            this.btn_connect.Text = "Verbinden";
+            this.btn_connect.Text = "Connect";
             this.btn_connect.UseVisualStyleBackColor = true;
             this.btn_connect.Click += new System.EventHandler(this.btn_connect_Click);
             // 
@@ -66,7 +67,7 @@
             this.btn_back.Name = "btn_back";
             this.btn_back.Size = new System.Drawing.Size(75, 23);
             this.btn_back.TabIndex = 3;
-            this.btn_back.Text = "Zurück";
+            this.btn_back.Text = "Back";
             this.btn_back.UseVisualStyleBackColor = true;
             this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
             // 
@@ -79,6 +80,7 @@
             this.Controls.Add(this.btn_connect);
             this.Controls.Add(this.lbl_txt_srvaddr);
             this.Controls.Add(this.txt_srvaddr);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_quickconnect";
             this.Text = "Quick Connect";
             this.ResumeLayout(false);

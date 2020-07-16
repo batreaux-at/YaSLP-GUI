@@ -53,7 +53,7 @@ namespace LANPlayClient
 
 		private void btn_save_Click(object sender, EventArgs e)
 		{
-			RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
+			RegistryKey key = Registry.CurrentUser.CreateSubKey("Software\\YaSLP-GUI");
 			key.SetValue("httptimeout", this.txt_httptimeout.Text);
 			key.SetValue("serverlisturl", this.txt_serverlisturl.Text);
 			key.SetValue("LPClientDir", this.fld_dia_client.SelectedPath);
@@ -78,7 +78,7 @@ namespace LANPlayClient
 
 		public void frm_einstellungen_Load(object sender, EventArgs e)
 		{
-			RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\r3n3kutaro\\LPgui");
+			RegistryKey key = Registry.CurrentUser.CreateSubKey("Software\\YaSLP-GUI");
 			string serverlisturl = key.GetValue("serverlisturl").ToString();
 			int reg_httptimeout = int.Parse(key.GetValue("httptimeout").ToString());
 			this.txt_httptimeout.Text = reg_httptimeout.ToString();
@@ -114,6 +114,7 @@ namespace LANPlayClient
 
 		private void InitializeComponent()
 		{
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_einstellungen));
             this.lbl_httptimeout = new System.Windows.Forms.Label();
             this.txt_httptimeout = new System.Windows.Forms.TextBox();
             this.txt_serverlisturl = new System.Windows.Forms.TextBox();
@@ -161,9 +162,9 @@ namespace LANPlayClient
             this.lbl_serverurl.AutoSize = true;
             this.lbl_serverurl.Location = new System.Drawing.Point(12, 34);
             this.lbl_serverurl.Name = "lbl_serverurl";
-            this.lbl_serverurl.Size = new System.Drawing.Size(81, 13);
+            this.lbl_serverurl.Size = new System.Drawing.Size(75, 13);
             this.lbl_serverurl.TabIndex = 3;
-            this.lbl_serverurl.Text = "Serverliste URL";
+            this.lbl_serverurl.Text = "Serverlist URL";
             // 
             // btn_save
             // 
@@ -171,7 +172,7 @@ namespace LANPlayClient
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(75, 23);
             this.btn_save.TabIndex = 4;
-            this.btn_save.Text = "Speichern";
+            this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
@@ -181,7 +182,7 @@ namespace LANPlayClient
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 5;
-            this.btn_cancel.Text = "Abbrechen";
+            this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
@@ -190,9 +191,9 @@ namespace LANPlayClient
             this.lbl_cldir.AutoSize = true;
             this.lbl_cldir.Location = new System.Drawing.Point(12, 58);
             this.lbl_cldir.Name = "lbl_cldir";
-            this.lbl_cldir.Size = new System.Drawing.Size(90, 13);
+            this.lbl_cldir.Size = new System.Drawing.Size(78, 13);
             this.lbl_cldir.TabIndex = 6;
-            this.lbl_cldir.Text = "Client Speicherort";
+            this.lbl_cldir.Text = "Client Directory";
             // 
             // btn_choosedir
             // 
@@ -209,9 +210,9 @@ namespace LANPlayClient
             this.lbl_txt_clparam.AutoSize = true;
             this.lbl_txt_clparam.Location = new System.Drawing.Point(12, 112);
             this.lbl_txt_clparam.Name = "lbl_txt_clparam";
-            this.lbl_txt_clparam.Size = new System.Drawing.Size(84, 13);
+            this.lbl_txt_clparam.Size = new System.Drawing.Size(89, 13);
             this.lbl_txt_clparam.TabIndex = 8;
-            this.lbl_txt_clparam.Text = "Client Parameter";
+            this.lbl_txt_clparam.Text = "Client Parameters";
             // 
             // txt_clparam
             // 
@@ -225,19 +226,19 @@ namespace LANPlayClient
             this.lbl_txt_parammode.AutoSize = true;
             this.lbl_txt_parammode.Location = new System.Drawing.Point(12, 84);
             this.lbl_txt_parammode.Name = "lbl_txt_parammode";
-            this.lbl_txt_parammode.Size = new System.Drawing.Size(119, 13);
+            this.lbl_txt_parammode.Size = new System.Drawing.Size(114, 13);
             this.lbl_txt_parammode.TabIndex = 10;
-            this.lbl_txt_parammode.Text = "Client Parameter Modus";
+            this.lbl_txt_parammode.Text = "Client Parameter Mode";
             // 
             // rb_standard
             // 
             this.rb_standard.AutoSize = true;
             this.rb_standard.Location = new System.Drawing.Point(138, 83);
             this.rb_standard.Name = "rb_standard";
-            this.rb_standard.Size = new System.Drawing.Size(68, 17);
+            this.rb_standard.Size = new System.Drawing.Size(59, 17);
             this.rb_standard.TabIndex = 11;
             this.rb_standard.TabStop = true;
-            this.rb_standard.Text = "Standard";
+            this.rb_standard.Text = "Default";
             this.rb_standard.UseVisualStyleBackColor = true;
             this.rb_standard.CheckedChanged += new System.EventHandler(this.rb_standard_CheckedChanged);
             // 
@@ -258,10 +259,10 @@ namespace LANPlayClient
             this.rb_manual.AutoSize = true;
             this.rb_manual.Location = new System.Drawing.Point(270, 83);
             this.rb_manual.Name = "rb_manual";
-            this.rb_manual.Size = new System.Drawing.Size(61, 17);
+            this.rb_manual.Size = new System.Drawing.Size(85, 17);
             this.rb_manual.TabIndex = 13;
             this.rb_manual.TabStop = true;
-            this.rb_manual.Text = "manuell";
+            this.rb_manual.Text = "User defined";
             this.rb_manual.UseVisualStyleBackColor = true;
             this.rb_manual.CheckedChanged += new System.EventHandler(this.rb_manual_CheckedChanged);
             // 
@@ -306,8 +307,9 @@ namespace LANPlayClient
             this.Controls.Add(this.txt_serverlisturl);
             this.Controls.Add(this.txt_httptimeout);
             this.Controls.Add(this.lbl_httptimeout);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_einstellungen";
-            this.Text = "Einstellungen";
+            this.Text = "Settings";
             this.Load += new System.EventHandler(this.frm_einstellungen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="LANPlayClient.exe" version="1.0.0.1" publicKeyToken="d0020251a75e0757" language="neutral" processorArchitecture="x86" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="LANPlayClient" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+    <commandLine file="LANPlayClient.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC-Manifestoptionen
+          Wenn Sie die Zugangsebene für das Windows-Benutzerkonto ändern möchten, ersetzen Sie den 
+          requestedExecutionLevel-Knoten durch eines der folgenden Elemente.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         Löschen Sie den requestedExecutionLevel-Knoten, wenn Sie 
+         zum Gewährleisten der Abwärtskompatibilität die Datei- und Registrierungsvirtualisierung verwenden möchten.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LANPlayClient.exe" size="184744">
+      <assemblyIdentity name="LANPlayClient" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>iL9hiQEqB597BQCNckO99pKatYb6lFx5IfBeRr14YKw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="700336">
+      <assemblyIdentity name="Newtonsoft.Json" version="12.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>f5ErKKB8Im4L46z7L1fwUFOKugEA+h8L8sOfGh8dqBQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="LANPlayClient.exe.config" size="163">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>l/VPfNqUVNQIPyQECM0xWlTJm+DXcPOne6oYsApBDIo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LANPlayClient.pdb" size="50688">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>kDSNWTZNMr7ACuKmOkGFlzVW0gxdgmWYkhCiyiUF5t8=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=RENEPC\rtrie" issuerKeyHash="c252290760d99e676dd7a03c8340002a14aac7c0" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>ou6vZtts7dJNDxIwjf/K+UWiMsi+VSjIs+ISmM0UlW0=</DigestValue></Reference></SignedInfo><SignatureValue>KApk8laOSc+5lCJwdOXEZSnU/v6R6zLOycOe1PIPfD+P7tqrvdxjjSebsxqsylFLSEch+SRsyAz5ZTT2PB13cUS4nNiiYWUKZxpsxbFLHBCb15+cYtYpM9UpaHAjYBJ9NNJRuLQb65tCjuQ3T9WhIkDg2qu3ZXJ1ZC/DmTxiQGQ=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>w/FjupqGIfBZVr/danhijUGDTSxbz6MHmwUQQHJIcDd7JK89Odxu6Li3s2KFnS62XTrW/DC2cPFHUmMFn6YuaNyutzQqT6y5iWiexckAxIzK+7Kizhznn7uWeA+BJJbQ9l2tSCMujuLUkx4pH9yY+Y63kcl1Tx6fOYMUQjY9J8U=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="6d9514cd9812e2b3c82855bec832a245f9caff8d30120f4dd2ed6cdb66afeea2" Description="" Url=""><as:assemblyIdentity name="LANPlayClient.exe" version="1.0.0.1" publicKeyToken="d0020251a75e0757" language="neutral" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=RENEPC\rtrie</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>nOZq+nDPo2rYG/aKL7JyP33ErAmxD3GBmKeaZkEFX58=</DigestValue></Reference></SignedInfo><SignatureValue>UaB7qISXp34IszNt1RqKD2j7qDe6nP9Sqz8h3nqUZehEVTWQ/maU9dWkUOL9XAjWEqs7oR9rLz9q2IkPl4/9Yz1/QTsFdrwpHXm1+JvahrIWkWeQAtti6+kUYzpLSl2rm3i908Y5EZlQn5Boz3IkWoA6sst3ZabhpDXjuCU0/To=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>w/FjupqGIfBZVr/danhijUGDTSxbz6MHmwUQQHJIcDd7JK89Odxu6Li3s2KFnS62XTrW/DC2cPFHUmMFn6YuaNyutzQqT6y5iWiexckAxIzK+7Kizhznn7uWeA+BJJbQ9l2tSCMujuLUkx4pH9yY+Y63kcl1Tx6fOYMUQjY9J8U=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIByTCCATKgAwIBAgIQKzC6XSIxb71FW2n4oAO6YDANBgkqhkiG9w0BAQsFADAjMSEwHwYDVQQDHhgAUgBFAE4ARQBQAEMAXAByAHQAcgBpAGUwHhcNMjAwNjExMTg1MTQ5WhcNMjEwNjEyMDA1MTQ5WjAjMSEwHwYDVQQDHhgAUgBFAE4ARQBQAEMAXAByAHQAcgBpAGUwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMPxY7qahiHwWVa/3Wp4Yo1Bg00sW8+jB5sFEEBySHA3eySvPTncbui4t7NihZ0utl061vwwtnDxR1JjBZ+mLmjcrrc0Kk+suYlonsXJAMSMyvuyos4c55+7lngPgSSW0PZdrUgjLo7i1JMeKR/cmPmOt5HJdU8enzmDFEI2PSfFAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAfIbCmRHlY+KN1g1EwiFfYj96XDlKiwLoRU+AX1DJMP52sA4Vh7AZqsvyJMqQf4wBQLtUIIOIyZtOheouiW+ZkQ2wPycAtBZN59qOGHAp1xrcIoic4dkl6wOm32Dqohzv9vBlCSu11QDu5hUqAzPS5nqKJuFDIdtpEEgZl+T/x1k=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
