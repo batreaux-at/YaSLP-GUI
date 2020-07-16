@@ -351,17 +351,9 @@ namespace LANPlayClient
 		private void Form1_Load(object sender, EventArgs e)
 		{
             RegistryKey key = Registry.CurrentUser.CreateSubKey("Software\\YaSLP-GUI");
-            if (Registry.CurrentUser.OpenSubKey("Software\\YaSLP-GUI") == null)
-			{
-				key.SetValue("httptimeout", "1500");
-				key.SetValue("serverlisturl", "https://raw.githubusercontent.com/GreatWizard/lan-play-status/master/public/data/servers.json");
-				key.SetValue("LPClientDir", "C:\\Kutaro-R3n3-LanplayGUI");
-                key.SetValue("Parameters", " ");
-                key.SetValue("Parametersmode", "1");
-            }
             if (key.GetValue("httptimeout") == null)
             {
-                key.SetValue("httptimeout", "300");
+                key.SetValue("httptimeout", "1000");
             }
             if (key.GetValue("serverlisturl") == null)
             {
@@ -405,12 +397,7 @@ namespace LANPlayClient
 			}
 			if (!File.Exists(string.Concat(LPClientDir, "\\lan-play-win64.exe")))
 			{
-				string downloadurl = "https://github.com/spacemeowx2/switch-lan-play/releases/latest/download/lan-play-win64.exe";
-				WebClient downloadclient = new WebClient();
-				frm_update displayupdate = new frm_update();
-				displayupdate.Show();
-				downloadclient.DownloadFile(downloadurl, string.Concat(LPClientDir, "\\lan-play-win64.exe"));
-				displayupdate.Close();
+                doclientupdate();
 			}
             RegistryKey npcapparam = Registry.LocalMachine.OpenSubKey("SYSTEM\\CurrentControlSet\\Services\\npcap\\Parameters");
 			if (Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\WinPcap") == null && npcapparam.GetValue("WinPcapCompatible").ToString() != "1")
@@ -454,14 +441,14 @@ namespace LANPlayClient
             this.mnu_Datei = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_einstellungen = new System.Windows.Forms.ToolStripMenuItem();
             this.quickConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_update = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_beenden = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_winpcapdl = new System.Windows.Forms.Button();
             this.pic_yoshi = new System.Windows.Forms.PictureBox();
             this.pb_loadsrvlist = new System.Windows.Forms.ProgressBar();
             this.madeby = new System.Windows.Forms.Label();
             this.drp_tmpsrvlist = new System.Windows.Forms.ComboBox();
-            this.mnu_update = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grp_srvstatus.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_yoshi)).BeginInit();
@@ -698,23 +685,37 @@ namespace LANPlayClient
             // mnu_einstellungen
             // 
             this.mnu_einstellungen.Name = "mnu_einstellungen";
-            this.mnu_einstellungen.Size = new System.Drawing.Size(180, 22);
+            this.mnu_einstellungen.Size = new System.Drawing.Size(168, 22);
             this.mnu_einstellungen.Text = "Settings";
             this.mnu_einstellungen.Click += new System.EventHandler(this.mnu_einstellungen_Click);
             // 
             // quickConnectToolStripMenuItem
             // 
             this.quickConnectToolStripMenuItem.Name = "quickConnectToolStripMenuItem";
-            this.quickConnectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quickConnectToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.quickConnectToolStripMenuItem.Text = "Quick Connect";
             this.quickConnectToolStripMenuItem.Click += new System.EventHandler(this.quickConnectToolStripMenuItem_Click);
+            // 
+            // mnu_update
+            // 
+            this.mnu_update.Name = "mnu_update";
+            this.mnu_update.Size = new System.Drawing.Size(168, 22);
+            this.mnu_update.Text = "Update";
+            this.mnu_update.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
             // mnu_beenden
             // 
             this.mnu_beenden.Name = "mnu_beenden";
-            this.mnu_beenden.Size = new System.Drawing.Size(180, 22);
+            this.mnu_beenden.Size = new System.Drawing.Size(168, 22);
             this.mnu_beenden.Text = "Quit / Exit /Finito!";
             this.mnu_beenden.Click += new System.EventHandler(this.mnu_beenden_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // btn_winpcapdl
             // 
@@ -753,9 +754,9 @@ namespace LANPlayClient
             this.madeby.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.madeby.Location = new System.Drawing.Point(639, 663);
             this.madeby.Name = "madeby";
-            this.madeby.Size = new System.Drawing.Size(141, 13);
+            this.madeby.Size = new System.Drawing.Size(148, 13);
             this.madeby.TabIndex = 13;
-            this.madeby.Text = "Made by R3n3at and Kutaro";
+            this.madeby.Text = "Made by Batreaux and Kutaro";
             this.madeby.Click += new System.EventHandler(this.label1_Click);
             // 
             // drp_tmpsrvlist
@@ -769,21 +770,7 @@ namespace LANPlayClient
             this.drp_tmpsrvlist.TabIndex = 14;
             this.drp_tmpsrvlist.Visible = false;
             // 
-            // mnu_update
-            // 
-            this.mnu_update.Name = "mnu_update";
-            this.mnu_update.Size = new System.Drawing.Size(180, 22);
-            this.mnu_update.Text = "Update";
-            this.mnu_update.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // frm_LANPlayClient
+            // frm_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -803,7 +790,7 @@ namespace LANPlayClient
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "frm_LANPlayClient";
+            this.Name = "frm_main";
             this.Text = "YaSLP-GUI";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.grp_srvstatus.ResumeLayout(false);
@@ -868,20 +855,26 @@ namespace LANPlayClient
 
         }
 
-        private async void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            doclientupdate(); 
+        }
+
+        public async void doclientupdate()
         {
             RegistryKey regkey = Registry.CurrentUser.CreateSubKey("Software\\YaSLP-GUI");
             string LPClientDir = regkey.GetValue("LPClientDir").ToString();
             if (!Directory.Exists(LPClientDir))
             {
                 Directory.CreateDirectory(LPClientDir);
-            }                
+            }
             string downloadurl = "https://github.com/spacemeowx2/switch-lan-play/releases/latest/download/lan-play-win64.exe";
             System.Uri downloaduri = new System.Uri(downloadurl);
             WebClient downloadclient = new WebClient();
             frm_update displayupdate = new frm_update();
             displayupdate.Show();
-            await Task.Run(() => downloadclient.DownloadFileAsync(downloaduri, string.Concat(LPClientDir, "\\lan-play-win64.exe")));
+            displayupdate.TopMost = true;
+            await Task.Run(() => downloadclient.DownloadFile(downloaduri, string.Concat(LPClientDir, "\\lan-play-win64.exe")));
             displayupdate.Close();
         }
 
