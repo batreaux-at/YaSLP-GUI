@@ -20,7 +20,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace LANPlayClient
 {
-	public class frm_LANPlayClient : Form
+	public class frm_main : Form
 	{
 		private IContainer components = null;
 
@@ -82,7 +82,7 @@ namespace LANPlayClient
         private ToolStripMenuItem aboutToolStripMenuItem;
         private Button btn_winpcapdl;
 
-		public frm_LANPlayClient()
+		public frm_main()
 		{
 			this.InitializeComponent();
 		}
@@ -428,7 +428,7 @@ namespace LANPlayClient
 
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_LANPlayClient));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_main));
             this.lbl_firststep = new System.Windows.Forms.Label();
             this.drp_srvlist = new System.Windows.Forms.ComboBox();
             this.btn_loadsrvlist = new System.Windows.Forms.Button();

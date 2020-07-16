@@ -106,7 +106,7 @@
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_LANPlayClient.cs">
+    <Compile Include="frm_main.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
       <SubType>Form</SubType>
@@ -126,8 +126,8 @@
     <EmbeddedResource Include="frm_einstellungen.resx">
       <DependentUpon>frm_einstellungen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_LANPlayClient.resx">
-      <DependentUpon>frm_LANPlayClient.cs</DependentUpon>
+    <EmbeddedResource Include="frm_main.resx">
+      <DependentUpon>frm_main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,8 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26020.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LANPlayClient", "LANPlayClient.csproj", "{C433A117-B835-4AC7-B504-61CB4175E4A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaSLP-GUI", "YaSLP-GUI.csproj", "{C433A117-B835-4AC7-B504-61CB4175E4A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,5 +17,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7737FF5-5BD9-47A4-BA2D-CDFAC1A8A36F}
 	EndGlobalSection
 EndGlobal
