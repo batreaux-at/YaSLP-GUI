@@ -1,0 +1,2 @@
+# YaSLP-GUI
+LANPlayClient GUI
