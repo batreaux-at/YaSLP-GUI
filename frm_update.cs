@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LANPlayClient
+namespace YaSLPGUI
 {
 	public class frm_update : Form
 	{
@@ -48,7 +48,7 @@ namespace LANPlayClient
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::LANPlayClient.Properties.Resources.FarawayNaiveBarnacle_size_restricted;
+            this.pictureBox1.Image = global::YaSLPGUI.Properties.Resources.FarawayNaiveBarnacle_size_restricted;
             this.pictureBox1.Location = new System.Drawing.Point(570, 13);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(61, 54);

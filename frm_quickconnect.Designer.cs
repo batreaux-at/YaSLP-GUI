@@ -1,4 +1,4 @@
-﻿namespace LANPlayClient
+﻿namespace YaSLPGUI
 {
     partial class frm_quickconnect
     {

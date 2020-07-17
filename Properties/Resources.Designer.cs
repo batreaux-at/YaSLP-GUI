@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LANPlayClient.Properties {
+namespace YaSLPGUI.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace LANPlayClient.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LANPlayClient.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("YaSLPGUI.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,16 +66,6 @@ namespace LANPlayClient.Properties {
         internal static System.Drawing.Bitmap FarawayNaiveBarnacle_size_restricted {
             get {
                 object obj = ResourceManager.GetObject("FarawayNaiveBarnacle-size_restricted", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap tenor {
-            get {
-                object obj = ResourceManager.GetObject("tenor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

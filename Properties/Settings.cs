@@ -3,7 +3,7 @@ using System.CodeDom.Compiler;
 using System.Configuration;
 using System.Runtime.CompilerServices;
 
-namespace LANPlayClient.Properties
+namespace YaSLPGUI.Properties
 {
 	[CompilerGenerated]
 	[GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]

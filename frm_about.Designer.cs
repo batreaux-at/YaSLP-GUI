@@ -1,4 +1,4 @@
-﻿namespace LANPlayClient
+﻿namespace YaSLPGUI
 {
     partial class frm_about
     {
@@ -48,7 +48,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::LANPlayClient.Properties.Resources.FarawayNaiveBarnacle_size_restricted;
+            this.pictureBox1.Image = global::YaSLPGUI.Properties.Resources.FarawayNaiveBarnacle_size_restricted;
             this.pictureBox1.Location = new System.Drawing.Point(417, 61);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(153, 160);

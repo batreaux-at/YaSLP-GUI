@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq.Expressions;
 using System.Windows.Forms;
 
-namespace LANPlayClient
+namespace YaSLPGUI
 {
 	public class frm_einstellungen : Form
 	{

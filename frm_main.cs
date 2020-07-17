@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-namespace LANPlayClient
+namespace YaSLPGUI
 {
 	public class frm_main : Form
 	{
@@ -731,7 +731,7 @@ namespace LANPlayClient
             // pic_yoshi
             // 
             this.pic_yoshi.Enabled = false;
-            this.pic_yoshi.Image = global::LANPlayClient.Properties.Resources.FarawayNaiveBarnacle_size_restricted;
+            this.pic_yoshi.Image = YaSLPGUI.Properties.Resources.FarawayNaiveBarnacle_size_restricted;
             this.pic_yoshi.Location = new System.Drawing.Point(501, 353);
             this.pic_yoshi.Name = "pic_yoshi";
             this.pic_yoshi.Size = new System.Drawing.Size(256, 256);

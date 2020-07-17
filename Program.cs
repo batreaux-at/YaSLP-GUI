@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace LANPlayClient
+namespace YaSLPGUI
 {
 	internal static class Program
 	{
