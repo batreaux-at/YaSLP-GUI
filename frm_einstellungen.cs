@@ -201,7 +201,7 @@ namespace YaSLPGUI
             this.btn_choosedir.Name = "btn_choosedir";
             this.btn_choosedir.Size = new System.Drawing.Size(99, 23);
             this.btn_choosedir.TabIndex = 7;
-            this.btn_choosedir.Text = "Ordner wählen";
+            this.btn_choosedir.Text = "Select Directory";
             this.btn_choosedir.UseVisualStyleBackColor = true;
             this.btn_choosedir.Click += new System.EventHandler(this.btn_choosedir_Click);
             // 
