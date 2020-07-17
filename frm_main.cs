@@ -201,9 +201,10 @@ namespace YaSLPGUI
             }
             public void btn_loadsrvlist_Click(object sender, EventArgs e)
 		{
-            
+
             //var t1 = await Task.Run(() => Loadsrvlist());
             //string[,] srvlist = Loadsrvlist();
+            btn_loadsrvlist.Enabled = false;
             int counter2 = 0;
             drp_srvlist.Items.Clear();
             drp_tmpsrvlist.Items.Clear();
@@ -233,7 +234,6 @@ namespace YaSLPGUI
             
             //drp_srvlist.SelectedIndex = 0;
             checkonlinestatus();
-            
             Cursor.Current = Cursors.Default;
             
         }
@@ -267,6 +267,7 @@ namespace YaSLPGUI
             }
             pb_loadsrvlist.Visible = false;
             pic_yoshi.Enabled = false;
+            btn_loadsrvlist.Enabled = true;
             
 
         }
