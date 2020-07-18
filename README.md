@@ -1,4 +1,4 @@
-# YaSLP-GUI
+# YaSLP-GUI (Yet another Lan Play GUI)
 
 YaSLP-GUI is a very user-friendly graphical interface which will only show you servers which are online. You don't need to search for a server list. The GUI has 2 built-in server list databases which are ready to use. We are two guys who are yet to learn more about how to code in C#, so there could be bugs in there.
 
