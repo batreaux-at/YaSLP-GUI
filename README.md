@@ -18,6 +18,6 @@ A: Sure! Its pretty simple. Go to http://slp.r3n3.at/ and press the "New Server 
 Q: Why did you make a second server list? 
 A: Not everyone is familiar with GitHub so we made a new list which is also user-friendly.
 
-Q: Why do you not want to show online servers? 
+Q: Why do you not want to show offline servers? 
 A: Kutaro wanted it this way because as the server list grows it would be very difficult to find online servers.
  
