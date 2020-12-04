@@ -2,6 +2,8 @@
 
 YaSLP-GUI is a very user-friendly graphical interface which will only show you servers which are online. You don't need to search for a server list. The GUI has 2 built-in server list databases which are ready to use. We are two guys who are yet to learn more about how to code in C#, so there could be bugs in there.
 
+![image](https://user-images.githubusercontent.com/7288322/99635752-4d512280-2aa7-11eb-8c0e-63f4a2204948.png)
+
 FAQ:
 
 Q: How do I use the GUI?
