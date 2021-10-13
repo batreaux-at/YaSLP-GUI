@@ -732,7 +732,7 @@ namespace YaSLPGUI
             // pic_yoshi
             // 
             this.pic_yoshi.Enabled = false;
-            this.pic_yoshi.Image = YaSLPGUI.Properties.Resources.FarawayNaiveBarnacle_size_restricted;
+            this.pic_yoshi.Image = global::YaSLPGUI.Properties.Resources.FarawayNaiveBarnacle_size_restricted;
             this.pic_yoshi.Location = new System.Drawing.Point(501, 353);
             this.pic_yoshi.Name = "pic_yoshi";
             this.pic_yoshi.Size = new System.Drawing.Size(256, 256);
@@ -765,7 +765,7 @@ namespace YaSLPGUI
             this.drp_tmpsrvlist.CausesValidation = false;
             this.drp_tmpsrvlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.drp_tmpsrvlist.FormattingEnabled = true;
-            this.drp_tmpsrvlist.Location = new System.Drawing.Point(143, 92);
+            this.drp_tmpsrvlist.Location = new System.Drawing.Point(71, 96);
             this.drp_tmpsrvlist.Name = "drp_tmpsrvlist";
             this.drp_tmpsrvlist.Size = new System.Drawing.Size(333, 527);
             this.drp_tmpsrvlist.TabIndex = 14;
