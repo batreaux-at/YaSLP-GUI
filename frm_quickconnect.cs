@@ -26,7 +26,7 @@ namespace YaSLPGUI
             string exepath = string.Concat(LPClientDir, "\\lan-play-win64.exe");
             string serveraddress = txt_srvaddr.Text;
             string parameters = key.GetValue("Parameters").ToString();
-            string runparameters = string.Concat(parameters, serveraddress);
+            string runparameters = string.Concat(parameters," --relay-server-addr ", serveraddress);
             Process.Start(exepath, runparameters);
         }
 

@@ -686,28 +686,28 @@ namespace YaSLPGUI
             // mnu_einstellungen
             // 
             this.mnu_einstellungen.Name = "mnu_einstellungen";
-            this.mnu_einstellungen.Size = new System.Drawing.Size(168, 22);
+            this.mnu_einstellungen.Size = new System.Drawing.Size(180, 22);
             this.mnu_einstellungen.Text = "Settings";
             this.mnu_einstellungen.Click += new System.EventHandler(this.mnu_einstellungen_Click);
             // 
             // quickConnectToolStripMenuItem
             // 
             this.quickConnectToolStripMenuItem.Name = "quickConnectToolStripMenuItem";
-            this.quickConnectToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.quickConnectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.quickConnectToolStripMenuItem.Text = "Quick Connect";
             this.quickConnectToolStripMenuItem.Click += new System.EventHandler(this.quickConnectToolStripMenuItem_Click);
             // 
             // mnu_update
             // 
             this.mnu_update.Name = "mnu_update";
-            this.mnu_update.Size = new System.Drawing.Size(168, 22);
+            this.mnu_update.Size = new System.Drawing.Size(180, 22);
             this.mnu_update.Text = "Update";
             this.mnu_update.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
             // mnu_beenden
             // 
             this.mnu_beenden.Name = "mnu_beenden";
-            this.mnu_beenden.Size = new System.Drawing.Size(168, 22);
+            this.mnu_beenden.Size = new System.Drawing.Size(180, 22);
             this.mnu_beenden.Text = "Quit / Exit /Finito!";
             this.mnu_beenden.Click += new System.EventHandler(this.mnu_beenden_Click);
             // 

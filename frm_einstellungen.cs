@@ -370,7 +370,7 @@ namespace YaSLPGUI
                     rb_manual.Checked = false;
                     rb_acnh.Checked = true;
                     txt_clparam.Enabled = false;
-                    txt_clparam.Text = " --pmtu 500 ";
+                    txt_clparam.Text = " --pmtu 500";
                     break;
 
                 case 3:
