@@ -17,7 +17,7 @@ A: Pretty simple! We use the GreatWizard Database, the server list from https://
 Q: Can server hosts add their servers to the R3n3.at database? [Depracticed]
 A: Sure! Its pretty simple. Go to http://slp.r3n3.at/ and press the "New Server Entry" button.
 
-Q: Why did you make a second server list? [Deprecticed]
+Q: Why did you make a second server list? [Depracticed]
 A: Not everyone is familiar with GitHub so we made a new list which is also user-friendly.
 
 Q: Why do you not want to show offline servers? 
